@@ -129,6 +129,11 @@ body {
 
 .rankings-view { padding: 0.6rem 1.25rem 1rem; }
 .rankings-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+.reg-card { margin-top: 1rem; }
+.reg-form { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: end; margin-top: 0.5rem; }
+.reg-form input[type="email"] { background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 0.35rem 0.5rem; font: inherit; min-width: 220px; }
+.reg-honey { display: none; }
+.reg-submit { background: var(--accent); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 0.9rem; font: inherit; font-weight: 600; cursor: pointer; }
 .pick-place { font-size: 0.95rem; margin: 0.8rem 0 0.35rem; }
 .pick-place:first-child { margin-top: 0.2rem; }
 .pick-score { color: var(--accent); font-size: 0.78rem; font-weight: 600; }
