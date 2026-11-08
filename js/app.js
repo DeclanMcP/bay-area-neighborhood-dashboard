@@ -10,6 +10,7 @@ import { loadTracts, median, values } from "./data.js";
 import { Choropleth, createMap } from "./map.js";
 import { renderPanel } from "./panel.js";
 import { buildFinder } from "./finder.js";
+import { buildRankings } from "./rankings.js";
 import { renderChecks } from "./checks.js";
 
 const state = {
@@ -232,6 +233,10 @@ async function main() {
       state.choro.zoomTo(list);
       selectTract(tract);
     },
+    onSelect: (f, zoom) => selectTract(f, zoom),
+  });
+  buildRankings({
+    features,
     onSelect: (f, zoom) => selectTract(f, zoom),
   });
   renderChecks(document.getElementById("dataset-checks"), features);

@@ -38,6 +38,25 @@
   </section>
 
   <aside class="sidebar">
+    <section class="card rankings">
+      <h2>Rankings</h2>
+      <label class="persona-label">Demographic
+        <select id="persona-select" aria-label="Ranking demographic">
+          <option value="young_family" selected>Young family</option>
+          <option value="retirees" disabled>Retirees (coming later)</option>
+          <option value="investor" disabled>Investor (coming later)</option>
+          <option value="first_time" disabled>First-time buyer (coming later)</option>
+        </select>
+      </label>
+      <p class="rankings-note">Young family with $500k saved. Score: schools level +
+        momentum 35%, price performance (past 5y growth + projected) 25%,
+        affordability 20%, safety 20% where a crime feed covers the tract
+        (otherwise the other factors re-weight and the row is badged).
+        Tracts are gated to $500k-$1.35M median value. Click a row to
+        inspect that tract.</p>
+      <div id="ranking-list" class="ranking-list"></div>
+    </section>
+
     <section class="finder card">
       <h2>Find a place</h2>
       <input id="place-search" type="search" placeholder="Type a town name..."
