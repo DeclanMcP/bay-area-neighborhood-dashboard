@@ -53,6 +53,14 @@ export const DIMENSIONS = [
     about: "Zillow ZHVI typical home value for the tract's ZIP area (Sep 2026), mapped " +
       "to tracts by land share. Smoothed, all-homes measure; complements the Census median.",
   },
+  {
+    key: "rent", label: "Median Rent", group: "Housing & value",
+    format: "usd", legendFormat: "usdCompact", scale: "seq", palette: MONEY,
+    about: "Median gross rent, Census ACS 2023 5-year (table B25064). This field was " +
+      "in the feature table from the first ACS pull; it only lacked a map view. " +
+      "Bay Area median tract: about $2,600/mo. The ACS top-codes very high rents, " +
+      "so the top of the scale compresses around $3,500.",
+  },
   // --- People ----------------------------------------------------------
   {
     key: "income", label: "Household Income", group: "People",
@@ -73,6 +81,55 @@ export const DIMENSIONS = [
       "the ACS margin of error, so their growth or decline is not statistically " +
       "distinguishable from flat; the region overall is about -1.8% over the period. " +
       "Rates are suppressed where the 2020 population was under 500.",
+  },
+  {
+    key: "bach_share", label: "Bachelor's Degree or Higher", group: "People",
+    format: "pctShare", scale: "seq", palette: TEAL,
+    about: "Share of residents age 25+ holding a bachelor's degree or higher, " +
+      "Census ACS 2023 5-year. Was already in every tract panel; now mappable.",
+  },
+  // --- Getting around & noise ------------------------------------------
+  {
+    key: "walk_index", label: "Walkability (EPA index)", group: "Getting around & noise",
+    format: "num1", scale: "seq", palette: GREEN, unit: "of 20",
+    about: "EPA National Walkability Index, 1 (least walkable) to 20 (most), a " +
+      "national ranking of block groups from intersection density, distance to " +
+      "the nearest transit stop, employment mix, and jobs-housing mix (EPA Smart " +
+      "Location Database), population-weighted to tracts. This is EPA's public " +
+      "index, not Walk Score: Walk Score is proprietary, API-keyed, and its terms " +
+      "bar bulk caching, so it cannot be mapped at tract scale. Darker green = " +
+      "more walkable. Downtown cores score 17-20; rural tracts 1-7.",
+  },
+  {
+    key: "transit_freq", label: "Transit Frequency", group: "Getting around & noise",
+    format: "num1", scale: "seq", palette: TEAL, unit: "services/hr, PM peak",
+    about: "Aggregate transit service frequency within a quarter mile, per hour " +
+      "during the evening peak (EPA Smart Location Database D4C, from GTFS feeds). " +
+      "Tracts with no transit service are a real 0, not missing: about a quarter " +
+      "of block groups sit outside transit coverage. The tract panel also carries " +
+      "distance to the nearest stop and jobs reachable in 45 minutes.",
+  },
+  {
+    key: "noise_share55", label: "Transport Noise · Area ≥55 dB", group: "Getting around & noise",
+    format: "pctShare", scale: "seq", palette: REDS,
+    about: "Share of the tract's area where modeled transportation noise reaches " +
+      "55 dBA or more (24-hour average). Source: US DOT Bureau of Transportation " +
+      "Statistics National Transportation Noise Map 2020 - road, rail, and aviation " +
+      "modeled together on a 30 m grid; road traffic dominates away from airports " +
+      "and rail lines. 55 dBA is roughly busy-street level. This share is the " +
+      "robust headline: it is unaffected by the model's 45 dBA floor. The tract " +
+      "panel also carries the tract's average level and its ≥60 dB share.",
+  },
+  {
+    key: "noise_db", label: "Transport Noise · Average dB", group: "Getting around & noise",
+    format: "num1", scale: "seq", palette: REDS, unit: "dBA, 24h average",
+    about: "Average transportation noise level per tract (same BTS 2020 model as " +
+      "the ≥55 dB view), computed as an energy mean over the tract's 30 m pixels " +
+      "with pixel values capped at 90 dBA so a few near-runway pixels cannot " +
+      "dominate a tract. Read with the floor in mind: BTS models nothing below " +
+      "45 dBA, so 45 means 'at or below the model floor', and quiet tracts read " +
+      "a little high. A tract crossed by one freeway will average much louder " +
+      "than its quietest streets - check the ≥55 dB area share alongside.",
   },
   // --- Schools ---------------------------------------------------------
   {

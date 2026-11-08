@@ -71,6 +71,25 @@ export function renderChecks(el, features) {
   const temps = coverage(features, "temp_summer_high");
   items.push(item("PASS", `Climate (summer highs, winter lows, heat days) on ${temps.toLocaleString()} tracts (${pct(temps, n)}), Open-Meteo ERA5 2016-2025.`));
 
+  const rent = coverage(features, "rent");
+  items.push(item("PASS", `Median rent on ${rent.toLocaleString()} tracts (${pct(rent, n)}), Census ACS 2023; the field sat unmapped in the feature table until this view was added.`));
+
+  const walk = coverage(features, "walk_index");
+  const tfreq = coverage(features, "transit_freq");
+  const tdist = coverage(features, "transit_dist");
+  items.push(item("PASS",
+    `Walkability (EPA National Walkability Index) on ${walk.toLocaleString()} tracts (${pct(walk, n)}); ` +
+    `transit frequency on ${tfreq.toLocaleString()}, distance to nearest stop on ${tdist.toLocaleString()} ` +
+    `(tracts with no transit service have a real 0 frequency and no distance). Not Walk Score: ` +
+    `that index is proprietary and its terms bar bulk caching.`));
+
+  const noise = coverage(features, "noise_share55");
+  items.push(item("NOTE",
+    `Transportation noise on ${noise.toLocaleString()} tracts (${pct(noise, n)}), US DOT BTS ` +
+    `National Transportation Noise Map 2020 (road + rail + aviation, 30 m modeled grid). ` +
+    `The model floors at 45 dBA, so the >=55 dB area share is the headline and the average ` +
+    `level reads as an upper bound in quiet tracts.`));
+
   const proj = coverage(features, "proj_value_5y");
   const projCrime = coverage(features, "proj_crime_v_5y");
   items.push(item("NOTE",
