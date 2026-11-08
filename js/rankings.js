@@ -30,6 +30,8 @@
 import { FORMATTERS } from "./dimensions.js";
 import { median } from "./data.js";
 import { ZILLOW_PICKS, PLACE_ALIASES, PICKS_NOTE } from "./zillow_picks.js";
+import { PICK_TRACTS } from "./pick_tracts.js";
+import { scoreListing, zpidOf } from "./listing_score.js";
 
 const usd = FORMATTERS.usd;
 
@@ -41,19 +43,25 @@ const usd = FORMATTERS.usd;
 const DIMS = {
   schools: {
     label: "Schools", short: "schools",
-    compute(eligible) {
-      const level = pctMap(eligible, "school_prof_area");
+    // Scorer factory: percentiles are looked up in the gated tracts'
+    // distributions, so any tract (gated or not) can be scored on the
+    // same scale. For gated tracts this reproduces the percentile map
+    // exactly (average-rank formula both ways).
+    scorer(eligible) {
+      const level = sortedValues(eligible, "school_prof_area");
       const changeVals = eligible.map((f) => f.properties.school_change_area)
         .filter((v) => typeof v === "number");
       const fill = changeVals.length ? median(changeVals) : 0;
-      const recent = pctMap(eligible, "school_change_area", fill);
-      const proj = pctMap(eligible, "proj_school_chg_5y");
-      const out = new Map();
-      for (const f of eligible) {
-        if (!level.has(f) || !proj.has(f)) continue;
-        out.set(f, 0.5 * level.get(f) + 0.5 * ((recent.get(f) + proj.get(f)) / 2));
-      }
-      return out;
+      const recent = sortedValues(eligible, "school_change_area");
+      const proj = sortedValues(eligible, "proj_school_chg_5y");
+      return (f) => {
+        const p = f.properties;
+        if (typeof p.school_prof_area !== "number" || typeof p.proj_school_chg_5y !== "number") return null;
+        const lv = pctLookup(level, p.school_prof_area);
+        const rc = pctLookup(recent, typeof p.school_change_area === "number" ? p.school_change_area : fill);
+        const pj = pctLookup(proj, p.proj_school_chg_5y);
+        return 0.5 * lv + 0.5 * ((rc + pj) / 2);
+      };
     },
     inputs: (p) => {
       const chg = typeof p.school_change_area === "number"
@@ -65,15 +73,14 @@ const DIMS = {
   },
   pricePerf: {
     label: "Price performance", short: "price perf.",
-    compute(eligible) {
-      const cagr = pctMap(eligible, "zhvi_cagr5");
-      const proj = pctMap(eligible, "proj_value_chg_5y");
-      const out = new Map();
-      for (const f of eligible) {
-        if (!cagr.has(f) || !proj.has(f)) continue;
-        out.set(f, (cagr.get(f) + proj.get(f)) / 2);
-      }
-      return out;
+    scorer(eligible) {
+      const cagr = sortedValues(eligible, "zhvi_cagr5");
+      const proj = sortedValues(eligible, "proj_value_chg_5y");
+      return (f) => {
+        const p = f.properties;
+        if (typeof p.zhvi_cagr5 !== "number" || typeof p.proj_value_chg_5y !== "number") return null;
+        return (pctLookup(cagr, p.zhvi_cagr5) + pctLookup(proj, p.proj_value_chg_5y)) / 2;
+      };
     },
     inputs: (p) => `value growth ${FORMATTERS.pctChange(p.zhvi_cagr5)}/yr (Zillow 5y) · ` +
       `${FORMATTERS.pctChange(p.proj_value_chg_5y)} projected 5y`,
@@ -201,47 +208,49 @@ export const PERSONAS = PROFILES;
 
 const MIN_COVERAGE = 0.7;
 
-// Average-rank percentile (0-100), matching pandas rank(pct=True).
-function percentiles(entries) {
-  const sorted = [...entries].sort((a, b) => a.value - b.value);
-  const out = new Map();
-  let i = 0;
-  while (i < sorted.length) {
-    let j = i;
-    while (j + 1 < sorted.length && sorted[j + 1].value === sorted[i].value) j++;
-    const avgRank = (i + j) / 2 + 1; // 1-based average rank
-    const pct = (avgRank / sorted.length) * 100;
-    for (let k = i; k <= j; k++) out.set(sorted[k].feature, pct);
-    i = j + 1;
-  }
-  return out;
+function sortedValues(features, key) {
+  return features.map((f) => f.properties[key])
+    .filter((v) => typeof v === "number" && Number.isFinite(v))
+    .sort((a, b) => a - b);
 }
 
-function pctMap(features, key, fill = null) {
-  const entries = [];
-  for (const f of features) {
-    let v = f.properties[key];
-    if (typeof v !== "number" && fill !== null) v = fill;
-    if (typeof v === "number" && Number.isFinite(v)) entries.push({ feature: f, value: v });
-  }
-  return percentiles(entries);
+// Average-rank percentile of v within a sorted distribution: for a
+// member of the distribution this equals percentiles() exactly, and it
+// also scores values from outside the distribution (clamped to the
+// ends), which is what lets a listing's tract be area-scored even when
+// the tract itself sits outside the profile's gates.
+function pctLookup(sorted, v) {
+  const n = sorted.length;
+  if (!n) return null;
+  let lo = 0, hi = n;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (sorted[mid] < v) lo = mid + 1; else hi = mid; }
+  const less = lo;
+  hi = n;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (sorted[mid] <= v) lo = mid + 1; else hi = mid; }
+  const equal = lo - less;
+  return ((less + (equal + 1) / 2) / n) * 100;
 }
 
-function dimScores(dim, eligible) {
-  if (dim.compute) return dim.compute(eligible);
-  const entries = [];
-  for (const f of eligible) {
+function dimScorer(dim, eligible) {
+  if (dim.scorer) return dim.scorer(eligible);
+  const sorted = eligible.map((f) => dim.measure(f.properties))
+    .filter((v) => typeof v === "number" && Number.isFinite(v))
+    .sort((a, b) => a - b);
+  return (f) => {
     const v = dim.measure(f.properties);
-    if (typeof v === "number" && Number.isFinite(v)) entries.push({ feature: f, value: v });
-  }
-  const pcts = percentiles(entries);
-  if (!dim.invert) return pcts;
-  const out = new Map();
-  for (const [f, v] of pcts) out.set(f, 100 - v);
-  return out;
+    if (typeof v !== "number" || !Number.isFinite(v)) return null;
+    const pct = pctLookup(sorted, v);
+    return dim.invert ? 100 - pct : pct;
+  };
 }
 
-export function rankTracts(features, profileKey = "young_family") {
+// Build the profile's scorer once: ranked (gated tracts, sorted) plus
+// scoreTract, which scores ANY tract against the gated distributions -
+// used for listings whose own tract is outside the gates (a $995k home
+// in a $1.4M-typical tract is exactly what the daily picks should find;
+// its affordability percentile is ~0, which pulls the area score down
+// honestly instead of erasing it).
+export function buildProfileScorer(features, profileKey = "young_family") {
   const profile = PROFILES[profileKey];
   const g = profile.gates;
   const eligible = features.filter((f) => {
@@ -250,33 +259,34 @@ export function rankTracts(features, profileKey = "young_family") {
       && typeof p.home_value === "number"
       && p.home_value >= g.minValue && p.home_value <= g.maxValue;
   });
-
   const active = Object.entries(profile.weights).filter(([, w]) => w > 0);
   const totalWeight = active.reduce((s, [, w]) => s + w, 0);
-  const scoreMaps = new Map(active.map(([id]) => [id, dimScores(DIMS[id], eligible)]));
+  const scorers = new Map(active.map(([id]) => [id, dimScorer(DIMS[id], eligible)]));
 
-  const scored = [];
-  for (const f of eligible) {
+  function scoreTract(f) {
     const comps = {};
     let num = 0, scoredWeight = 0, ok = true;
     for (const [id, w] of active) {
-      const m = scoreMaps.get(id);
-      const v = m.has(f) ? m.get(f) : null;
+      const v = scorers.get(id)(f);
       comps[id] = v;
-      if (v === null) {
+      if (v === null || v === undefined) {
         if (profile.require.includes(id)) ok = false;
       } else {
         num += w * v;
         scoredWeight += w;
       }
     }
-    if (!ok || scoredWeight / totalWeight < MIN_COVERAGE) continue;
-    scored.push({ feature: f, score: num / scoredWeight, comps, scoredWeight, totalWeight });
+    if (!ok || scoredWeight / totalWeight < MIN_COVERAGE || !Number.isFinite(num / scoredWeight)) return null;
+    return { feature: f, score: num / scoredWeight, comps, scoredWeight, totalWeight };
   }
-  // A NaN score would scramble Array.sort (NaN comparisons are unordered).
-  const finite = scored.filter((r) => Number.isFinite(r.score));
-  finite.sort((a, b) => b.score - a.score);
-  return finite;
+
+  const ranked = eligible.map(scoreTract).filter(Boolean);
+  ranked.sort((a, b) => b.score - a.score);
+  return { profile, ranked, scoreTract };
+}
+
+export function rankTracts(features, profileKey = "young_family") {
+  return buildProfileScorer(features, profileKey).ranked;
 }
 
 const TYPE_LABELS = {
@@ -325,9 +335,47 @@ function breakdownHtml(r, rankedCount, profile) {
     `and the points add up to the overall score (rounding aside).</p></details>`;
 }
 
-function renderPicks(ranked, profile, type = "all") {
+// Per-listing breakdown: how this home's score was built - its own
+// tract's area score, and the listing layer (value / fit / freshness).
+function listingBreakdownHtml(p, s, profile) {
+  const areaRow = s.area !== null
+    ? `<tr><td>Area (its tract, ${profile.label}${s.areaInBand === false ? " · tract outside the ranked band, scored on the same percentiles" : ""})</td><td class="bd-num">${Math.round(s.area)}</td><td class="bd-num">50%</td><td class="bd-num">${(0.5 * s.area).toFixed(1)}</td></tr>`
+    : "";
+  const valueTxt = s.value === null
+    ? "not scored (land has no typical-value comparison)"
+    : `${Math.round(s.priceRatio * 100)}% of its tract's typical value ${usd(p.price / s.priceRatio)}`;
+  const fitTxt = [p.type, p.beds ? `${p.beds} bd` : null, p.baths ? `${p.baths} ba` : null,
+    p.sqft ? `${p.sqft.toLocaleString("en-US")} sqft` : null, p.lot || null].filter(Boolean).join(" · ");
+  const freshTxt = (typeof p.days === "number" ? `${p.days} days on Zillow` : "days on market unknown") +
+    (s.cut > 0 ? ` · price cut ${usd(s.cut)} recorded` : "");
+  // Listing layer internally weights value 50 / fit 30 / freshness 20,
+  // re-spread when value is unscored; the layer is half the home score
+  // (or all of it when the area is unscored).
+  const layerShare = s.area !== null ? 0.5 : 1;
+  const wInLayer = s.value !== null
+    ? { value: 0.5, fit: 0.3, fresh: 0.2 }
+    : { value: 0, fit: 0.6, fresh: 0.4 };
+  const rows = areaRow
+    + (s.value !== null ? `<tr><td>Value for money<span class="bd-inputs">${valueTxt}</span></td><td class="bd-num">${Math.round(s.value)}</td><td class="bd-num">${Math.round(layerShare * wInLayer.value * 100)}%</td><td class="bd-num">${(layerShare * wInLayer.value * s.value).toFixed(1)}</td></tr>` : "")
+    + `<tr><td>Fit for a ${profile.label.toLowerCase()}<span class="bd-inputs">${fitTxt}</span></td><td class="bd-num">${Math.round(s.fit)}</td><td class="bd-num">${Math.round(layerShare * wInLayer.fit * 100)}%</td><td class="bd-num">${(layerShare * wInLayer.fit * s.fit).toFixed(1)}</td></tr>`
+    + `<tr><td>Freshness<span class="bd-inputs">${freshTxt}</span></td><td class="bd-num">${Math.round(s.fresh)}</td><td class="bd-num">${Math.round(layerShare * wInLayer.fresh * 100)}%</td><td class="bd-num">${(layerShare * wInLayer.fresh * s.fresh).toFixed(1)}</td></tr>`;
+  const notes = [
+    s.area === null
+      ? `<p class="bd-note">No area score: this home's tract could not be scored under the ${profile.label} profile (its address could not be tract-matched, or a required dimension is unmeasured there), so the home score is the listing layer alone.</p>` : "",
+    s.value === null
+      ? `<p class="bd-note">Value for money is not scored for land (no typical-value comparison); fit and freshness re-spread inside the listing layer.</p>` : "",
+    `<p class="bd-note">Home score = ${s.area !== null ? "50% area + 50% listing layer" : "listing layer only"}. The listing layer weights value 50%, fit 30%, freshness 20%. Interior condition, HOA and taxes are not scored - the data does not carry them.</p>`,
+  ].join("");
+  return `<details class="pick-breakdown"><summary>Home score breakdown</summary>` +
+    `<table class="bd-table"><thead><tr><th>Component</th><th>Score</th>` +
+    `<th>Weight</th><th>Points</th></tr></thead><tbody>${rows}</tbody></table>` + notes + `</details>`;
+}
+
+function renderPicks(scorer, profile, profileKey, featureByTract, type = "all") {
   const el = document.getElementById("picks-list");
   if (!el) return;
+  const ranked = scorer.ranked;
+  const rankedTracts = new Set(ranked.map((r) => r.feature.properties.tract));
   // Place leaders: the first (highest-scoring) tract per place, top 6 places.
   const seen = new Set();
   const leaders = [];
@@ -363,7 +411,16 @@ function renderPicks(ranked, profile, type = "all") {
       return head +
         `<p class="pick-none">No ${TYPE_LABELS[type] ?? type} picks for this area in the current pull.</p>`;
     }
-    return head + picks.map((p) => {
+    // Score every listing against its own tract, best home first.
+    const scored = picks.map((p) => {
+      const tract = PICK_TRACTS[zpidOf(p)] ?? null;
+      const feature = tract ? featureByTract.get(tract) ?? null : null;
+      const entry = feature ? scorer.scoreTract(feature) : null;
+      const s = scoreListing(p, entry, feature?.properties ?? null, profileKey);
+      s.areaInBand = tract ? rankedTracts.has(tract) : false;
+      return { p, s };
+    }).sort((a, b) => b.s.home - a.s.home);
+    return head + scored.map(({ p, s }) => {
       const spec = [
         p.type,
         p.beds ? `${p.beds} bd` : null,
@@ -372,12 +429,16 @@ function renderPicks(ranked, profile, type = "all") {
         p.lot || null,
         p.days != null ? `${p.days} days on Zillow` : null,
       ].filter(Boolean).join(" · ");
+      const badge = s.area === null ? ` <span class="rank-badge">area not scored</span>` : "";
       return `<div class="pick-row">` +
         `<a class="pick-addr" href="${p.url}" target="_blank" rel="noopener">${p.address} ↗</a>` +
         `<span class="pick-price">${usd(p.price)}</span>` +
+        `<span class="pick-home">Home ${Math.round(s.home)}</span>${badge}` +
         (spec ? `<span class="pick-meta">${spec}</span>` : "") +
         (p.note ? `<span class="pick-note">${p.note}</span>` : "") +
-        `<span class="pick-src">Live on Zillow · checked Nov 7</span></div>`;
+        `<span class="pick-src">Live on Zillow · checked Nov 7</span>` +
+        listingBreakdownHtml(p, s, profile) +
+        `</div>`;
     }).join("");
   }).join("");
 }
@@ -390,23 +451,27 @@ export function buildRankings({ features, onSelect, limit = 12 }) {
   if (noteEl) noteEl.textContent = PICKS_NOTE;
   const profileNoteEl = document.getElementById("profile-note");
 
+  const featureByTract = new Map(features.map((f) => [f.properties.tract, f]));
   let currentType = "all";
-  let currentRanked = [];
+  let currentScorer = null;
   let currentProfile = PROFILES.young_family;
+  let currentProfileKey = "young_family";
   const typeEl = document.getElementById("ptype-select");
   if (typeEl) {
     typeEl.addEventListener("change", () => {
       currentType = typeEl.value;
-      renderPicks(currentRanked, currentProfile, currentType);
+      if (currentScorer) renderPicks(currentScorer, currentProfile, currentProfileKey, featureByTract, currentType);
     });
   }
 
   function render(profileKey) {
     const profile = PROFILES[profileKey] ?? PROFILES.young_family;
     currentProfile = profile;
-    const ranked = rankTracts(features, profileKey);
-    currentRanked = ranked;
-    renderPicks(ranked, profile, currentType);
+    currentProfileKey = profileKey;
+    const scorer = buildProfileScorer(features, profileKey);
+    currentScorer = scorer;
+    const ranked = scorer.ranked;
+    renderPicks(scorer, profile, profileKey, featureByTract, currentType);
     if (profileNoteEl) {
       const g = profile.gates;
       profileNoteEl.textContent =

@@ -132,6 +132,7 @@ body {
 .pick-place { font-size: 0.95rem; margin: 0.8rem 0 0.35rem; }
 .pick-place:first-child { margin-top: 0.2rem; }
 .pick-score { color: var(--accent); font-size: 0.78rem; font-weight: 600; }
+.pick-home { color: var(--accent); font-size: 0.78rem; font-weight: 700; border: 1px solid var(--accent); border-radius: 999px; padding: 0 0.45rem; margin-left: 0.4rem; white-space: nowrap; }
 .pick-none { color: var(--muted); font-size: 0.84rem; margin: 0 0 0.4rem; }
 .pick-row { display: grid; grid-template-columns: 1fr auto; gap: 0.05rem 0.7rem; border-top: 1px solid var(--line); padding: 0.45rem 0; }
 .pick-addr { font-weight: 600; font-size: 0.9rem; color: var(--accent); text-decoration: none; }
