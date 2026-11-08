@@ -64,7 +64,9 @@ export class Choropleth {
 
   setDimension(dim) {
     this.dim = dim;
-    this.breaks = quantileBreaks(values(this.features, dim.key), dim.palette.length);
+    // A dimension may pin its own breaks (PM2.5 is anchored to the federal
+    // 9 µg/m³ standard); everything else uses data quantiles.
+    this.breaks = dim.breaks ? [...dim.breaks] : quantileBreaks(values(this.features, dim.key), dim.palette.length);
     const fmt = FORMATTERS[dim.format];
     this.layer.eachLayer((layer) => {
       const p = layer.feature.properties;

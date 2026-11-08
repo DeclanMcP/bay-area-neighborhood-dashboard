@@ -34,7 +34,7 @@ const ROWS = [
   ["PM2.5 annual mean (µg/m³)", "pm25", "num1"],
   ["PM2.5 (state pctile)", "pm25_pctile", "num0"],
   ["Ozone, summer mean of daily max (ppb)", "ozone", "num0"],
-  ["Diesel PM (µg/m³)", "diesel_pm", "num1"],
+  ["Diesel PM (µg/m³)", "diesel_pm", "num2"],
   ["FAIR Plan policies (2026)", "fair_policies", "num0"],
   ["FAIR Plan share of homes", "fair_share", "pctShare"],
   ["Summer high, Jun–Aug mean (°F)", "temp_summer_high", "degF"],
@@ -102,21 +102,29 @@ export function renderPanel(el, feature, activeDim = null) {
   if (!feature) return;
   const p = feature.properties;
   const noteItems = notes(p);
+  // In projected mode the panel LEADS with a spotlight: the projected level
+  // for the active dimension and horizon, its change vs today, and the
+  // backtest-calibrated range — not buried in the projections table below.
+  let spotlightHtml = "";
   if (activeDim && activeDim.valueKey) {
     const fmt = FORMATTERS[activeDim.levelFormat ?? activeDim.format];
     const point = p[activeDim.valueKey];
     if (typeof point === "number") {
-      let text = `${activeDim.valueLabel} ${2026 + (activeDim.horizon ?? 5)}: ${fmt(point)}`;
+      const showYear = Boolean(activeDim.changeKey);
+      const kicker = `${activeDim.valueLabel}${showYear ? " " + (2026 + (activeDim.horizon ?? 5)) : ""}`;
+      let main = `<strong>${fmt(point)}</strong>`;
       const chg = activeDim.changeKey ? p[activeDim.changeKey] : null;
       if (typeof chg === "number" && activeDim.changeFormat) {
-        text += ` (${FORMATTERS[activeDim.changeFormat](chg)} vs today)`;
+        main += `<span>${FORMATTERS[activeDim.changeFormat](chg)} vs today</span>`;
       }
       const lo = activeDim.loKey ? p[activeDim.loKey] : null;
       const hi = activeDim.hiKey ? p[activeDim.hiKey] : null;
+      let range = "";
       if (typeof lo === "number" && typeof hi === "number") {
-        text += `. Range: ${fmt(lo)} to ${fmt(hi)} (interval calibrated to the method's backtest error).`;
+        range = `<small>Range ${fmt(lo)} to ${fmt(hi)} (interval calibrated to the method's backtest error)</small>`;
       }
-      noteItems.unshift({ kind: "info", text });
+      spotlightHtml =
+        `<div class="spotlight panel-spotlight"><span class="spot-kicker">${kicker}</span>${main}${range}</div>`;
     }
   }
   const noteHtml = noteItems
@@ -140,6 +148,7 @@ export function renderPanel(el, feature, activeDim = null) {
   el.innerHTML =
     `<h2>${p.place ?? "Unknown area"}</h2>` +
     `<p class="subtext">${p.county} County · Tract ${p.tract} · ZIP ${p.zip_main ?? "—"}</p>` +
+    spotlightHtml +
     noteHtml +
     `<table>${rowHtml(ROWS)}</table>` +
     `<h3 class="panel-subhead">Projections (backtested, docs in repo)</h3>` +

@@ -61,8 +61,12 @@ export function renderChecks(el, features) {
   const water = coverage(features, "water_pctile");
   items.push(item("PASS", `Water quality on ${water.toLocaleString()} tracts (${pct(water, n)}).`));
 
-  const air = coverage(features, "air_pollution");
-  items.push(item("PASS", `Air pollution (PM2.5 / ozone / diesel PM average percentile) on ${air.toLocaleString()} tracts (${pct(air, n)}), CalEnviroScreen 4.0.`));
+  const airKeys = ["air_pollution", "pm25", "ozone", "diesel_pm"];
+  const airCounts = airKeys.map((k) => coverage(features, k));
+  const airComplete = airCounts.every((c) => c === airCounts[0]);
+  items.push(item(airComplete ? "PASS" : "NOTE",
+    `Air on ${airCounts[0].toLocaleString()} tracts (${pct(airCounts[0], n)}): the average-percentile view ` +
+    `plus separate PM2.5, ozone, and diesel PM tabs, CalEnviroScreen 4.0.`));
 
   const temps = coverage(features, "temp_summer_high");
   items.push(item("PASS", `Climate (summer highs, winter lows, heat days) on ${temps.toLocaleString()} tracts (${pct(temps, n)}), Open-Meteo ERA5 2016-2025.`));

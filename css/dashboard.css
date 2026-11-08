@@ -71,6 +71,22 @@ body {
 #county-table table { border-collapse: collapse; font-size: 0.85rem; margin-top: 0.4rem; }
 #county-table th, #county-table td { border: 1px solid var(--line); padding: 0.3rem 0.6rem; text-align: right; background: #fff; }
 #county-table th { text-align: left; font-weight: 600; }
+#county-table th.num, #county-table td.num { text-align: right; }
+
+/* Projected-mode spotlight: the headline projected value + change, shown as
+   a banner in the overview and at the top of a clicked tract's panel. */
+.spotlight {
+  display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; align-items: baseline;
+  background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid var(--accent);
+  border-radius: 10px; padding: 0.6rem 0.8rem; margin: 0.7rem 0 0.2rem;
+}
+.spotlight strong { font-size: 1.3rem; font-variant-numeric: tabular-nums; }
+.spotlight .spot-kicker {
+  color: var(--muted); font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.spotlight small { color: var(--muted); }
+.panel-spotlight { margin: 0 0 0.7rem; }
 #county-table caption { text-align: left; font-weight: 600; padding-bottom: 0.3rem; }
 
 .sidebar { display: flex; flex-direction: column; gap: 1rem; }

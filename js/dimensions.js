@@ -12,8 +12,10 @@ export const FORMATTERS = {
   pctShare: (v) => (v * 100).toFixed(1) + "%",
   num0: (v) => Math.round(v).toLocaleString("en-US"),
   num1: (v) => v.toFixed(1),
+  num2: (v) => v.toFixed(2),
   years: (v) => v.toFixed(1) + " yrs",
   degF: (v) => Math.round(v) + "°F",
+  degF1: (v) => v.toFixed(1) + "°F",
   ppChange: (v) => (v >= 0 ? "+" : "") + v.toFixed(1) + " pts",
   sharePointChange: (v) => (v >= 0 ? "+" : "") + (v * 100).toFixed(1) + " pts",
 };
@@ -138,24 +140,48 @@ export const DIMENSIONS = [
   },
   // --- Environment & insurance -----------------------------------------
   {
-    key: "water_pctile", label: "Water Quality", group: "Environment & insurance",
+    key: "water_pctile", label: "Water Quality", group: "Air, water & insurance",
     format: "num0", scale: "seq", palette: YLORD,
     about: "CalEnviroScreen 4.0 drinking-water contaminant index, statewide percentile. " +
       "Higher = worse water. Most Bay Area tracts score low; Napa's small upvalley " +
       "systems are the regional outlier.",
   },
   {
-    key: "air_pollution", label: "Air Pollution", group: "Environment & insurance",
+    key: "air_pollution", label: "Air Pollution · Average", group: "Air, water & insurance",
     format: "num0", scale: "seq", palette: YLORD,
     about: "Air pollution average: the mean of the three CalEnviroScreen 4.0 statewide " +
       "percentiles for PM2.5, ozone, and diesel particulate matter (monitoring window " +
-      "2017-2019). Higher = worse air. The tract panel carries the actual annual-average " +
-      "concentrations: PM2.5 runs 5.5-10.5 ug/m3 across the region (the federal annual " +
-      "standard is 9), ozone peaks inland, and diesel PM concentrates near ports, " +
-      "freeways, and dense traffic.",
+      "2017-2019). Higher = worse air. The three ingredients also have their own tabs: " +
+      "PM2.5 runs 5.5-10.5 ug/m3 across the region (the federal annual standard is 9), " +
+      "ozone peaks inland, and diesel PM concentrates near ports, freeways, and dense traffic.",
   },
   {
-    key: "fair_share", label: "FAIR Plan Share", group: "Environment & insurance",
+    key: "pm25", label: "Air · PM2.5 Average", group: "Air, water & insurance",
+    format: "num1", scale: "seq", palette: YLORD, unit: "µg/m³ annual mean",
+    breaks: [6.5, 7.5, 8.0, 8.5, 9.0, 9.5],
+    about: "PM2.5 annual-average concentration (CalEnviroScreen 4.0, 2017-2019). The " +
+      "color bands are anchored to the federal annual standard of 9 µg/m³: 211 tracts " +
+      "sit above it, mostly along the eastern shore and the South Bay freeway corridors. " +
+      "The tract panel also carries each tract's statewide percentile for this pollutant.",
+  },
+  {
+    key: "ozone", label: "Air · Ozone Average", group: "Air, water & insurance",
+    format: "num0", scale: "seq", palette: YLORD, unit: "ppb",
+    about: "Ozone: summer-season mean of the daily maximum 8-hour concentration " +
+      "(CalEnviroScreen 4.0, 2017-2019; stored in ppm by the source and shown here in " +
+      "ppb). Ozone forms downwind on hot days, so it peaks inland (Solano, Contra Costa, " +
+      "inland Santa Clara) and stays lowest in San Francisco and along the coast.",
+  },
+  {
+    key: "diesel_pm", label: "Air · Diesel PM Average", group: "Air, water & insurance",
+    format: "num2", scale: "seq", palette: YLORD, unit: "µg/m³",
+    about: "Diesel particulate matter, annual-average concentration (CalEnviroScreen 4.0, " +
+      "2017-2019 emissions-based estimates). The regional median is about 0.20 µg/m³; " +
+      "the highest values concentrate near the Port of Oakland, freight corridors, and " +
+      "dense downtown traffic, and the statewide percentile reaches 100 in the worst tract.",
+  },
+  {
+    key: "fair_share", label: "FAIR Plan Share", group: "Air, water & insurance",
     format: "pctShare", scale: "seq", palette: PURPLE,
     about: "CA FAIR Plan dwelling policies (2026) as a share of housing units, by ZIP " +
       "mapped to tracts. The FAIR Plan is the insurer of last resort; a rising share " +
@@ -172,7 +198,7 @@ export const DIMENSIONS = [
   },
   {
     key: "temp_winter_low", label: "Winter Lows", group: "Climate",
-    format: "degF", scale: "seq", palette: TEAL, reverse: true,
+    format: "degF", legendFormat: "degF1", scale: "seq", palette: TEAL, reverse: true,
     about: "Mean daily low temperature, December to February, 2016-2025 average. " +
       "Colors run cold-dark to warm-pale: the darkest blue tracts are the COLDEST. " +
       "Coastal tracts stay in the upper 40s; inland valley floors drop to the " +

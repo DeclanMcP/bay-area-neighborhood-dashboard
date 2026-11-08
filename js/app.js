@@ -6,7 +6,7 @@ import {
   DIMENSIONS, DIMENSION_BY_KEY, FORMATTERS, GROUPS,
   PROJECTED_DIMENSIONS, PROJECTED_GROUPS,
 } from "./dimensions.js";
-import { loadTracts, median } from "./data.js";
+import { loadTracts, median, values } from "./data.js";
 import { Choropleth, createMap } from "./map.js";
 import { renderPanel } from "./panel.js";
 import { buildFinder } from "./finder.js";
@@ -87,6 +87,48 @@ function selectDimension(entry) {
     ? `${entry.about} Showing the ${state.horizon}-year horizon (to ${2026 + state.horizon}).`
     : entry.about;
   renderCountyTable();
+  renderSpotlight();
+}
+
+// Projected-mode spotlight banner: the regional median of the active
+// projected dimension, level and change together, so the headline number
+// is visible without clicking a tract.
+function renderSpotlight() {
+  const el = document.getElementById("spotlight");
+  if (state.mode !== "projected") {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  const entry = state.entry;
+  const dim = state.dim;
+  const levelVals = dim.valueKey ? values(state.features, dim.valueKey) : [];
+  if (!levelVals.length) {
+    el.hidden = true;
+    return;
+  }
+  const year = 2026 + state.horizon;
+  const kicker = entry.changeBase
+    ? `Regional median · ${entry.valueLabel} ${year}`
+    : `Regional median · ${entry.valueLabel ?? entry.label}`;
+  let detail = "";
+  if (dim.changeKey) {
+    const chg = median(values(state.features, dim.changeKey));
+    detail = `<span>${FORMATTERS[entry.mapFormat](chg)} vs today</span>`;
+  } else if (entry.id === "proj_water") {
+    detail = "<span>carried forward from today (persistence)</span>";
+  } else if (entry.id === "proj_pressure") {
+    detail = "<span>scenario index, not a forecast</span>";
+  } else if (entry.id === "proj_crime_v" || entry.id === "proj_crime_p") {
+    detail = "<span>SF persistence; Oakland/Sonoma level-only</span>";
+  }
+  const unit = entry.unit ? `<small>${entry.unit}</small>` : "";
+  el.innerHTML =
+    `<span class="spot-kicker">${kicker}</span>` +
+    `<strong>${FORMATTERS[entry.format](median(levelVals))}</strong>` +
+    detail +
+    `<small>${levelVals.length.toLocaleString("en-US")} tracts</small>` + unit;
+  el.hidden = false;
 }
 
 function setMode(mode) {
@@ -110,18 +152,45 @@ function setHorizon(h) {
 
 function renderCountyTable() {
   const dim = state.dim;
+  // Projected change dimensions pair each county's projected LEVEL median
+  // with its CHANGE median; a change-only table hides the actual values.
+  const paired = state.mode === "projected" && dim.valueKey && dim.changeKey;
   const byCounty = new Map();
   for (const f of state.features) {
     const c = f.properties.county;
-    if (!byCounty.has(c)) byCounty.set(c, []);
+    if (!byCounty.has(c)) byCounty.set(c, { map: [], level: [], change: [] });
+    const bucket = byCounty.get(c);
     const v = f.properties[dim.key];
-    if (typeof v === "number") byCounty.get(c).push(v);
+    if (typeof v === "number") bucket.map.push(v);
+    if (paired) {
+      const lv = f.properties[dim.valueKey];
+      if (typeof lv === "number") bucket.level.push(lv);
+      const cv = f.properties[dim.changeKey];
+      if (typeof cv === "number") bucket.change.push(cv);
+    }
+  }
+  const counties = [...byCounty.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  if (paired) {
+    const levelFmt = FORMATTERS[state.entry.format];
+    const changeFmt = FORMATTERS[state.entry.mapFormat];
+    const head =
+      `<tr><th>County</th><th class="num">${state.entry.valueLabel}</th>` +
+      `<th class="num">Change</th><th class="num">Tracts</th></tr>`;
+    const rows = counties
+      .map(([county, b]) =>
+        `<tr><th>${county}</th>` +
+        `<td>${b.level.length ? levelFmt(median(b.level)) : "no data"}</td>` +
+        `<td>${b.change.length ? changeFmt(median(b.change)) : "no data"}</td>` +
+        `<td>${b.level.length} tracts</td></tr>`)
+      .join("");
+    document.getElementById("county-table").innerHTML =
+      `<table><caption>County medians: ${state.entry.label} (${2026 + state.horizon})</caption>${head}${rows}</table>`;
+    return;
   }
   const fmt = FORMATTERS[dim.format];
-  const rows = [...byCounty.entries()]
-    .sort((a, b) => a[0].localeCompare(b[0]))
-    .map(([county, vals]) =>
-      `<tr><th>${county}</th><td>${vals.length ? fmt(median(vals)) : "no data"}</td><td>${vals.length} tracts</td></tr>`)
+  const rows = counties
+    .map(([county, b]) =>
+      `<tr><th>${county}</th><td>${b.map.length ? fmt(median(b.map)) : "no data"}</td><td>${b.map.length} tracts</td></tr>`)
     .join("");
   document.getElementById("county-table").innerHTML =
     `<table><caption>County medians: ${dim.label}</caption>${rows}</table>`;
