@@ -11,7 +11,7 @@ const ROWS = [
   ["Median household income", "income", "usd"],
   ["Bachelor's degree or higher", "bach_share", "pctShare"],
   ["Households with children", "hh_kids_share", "pctShare"],
-  ["Median home value", "home_value", "usd"],
+  ["Home value (Zillow ZHVI)", "home_value", "usd"],
   ["Median gross rent", "rent", "usd"],
   ["Walkability, EPA index (of 20)", "walk_index", "num1"],
   ["Transit frequency (services/hr, PM peak)", "transit_freq", "num1"],
@@ -23,7 +23,7 @@ const ROWS = [
   ["Transport noise, area ≥55 dB", "noise_share55", "pctShare"],
   ["Transport noise, area ≥60 dB", "noise_share60", "pctShare"],
   ["Transport noise, 95th pctile (dBA)", "noise_p95", "num0"],
-  ["Zillow typical value (ZHVI)", "zhvi", "usd"],
+  ["Median home value (Census ACS)", "acs_value", "usd"],
   ["Value growth, Zillow 5y", "zhvi_cagr5", "pctChange"],
   ["Value growth, FHFA 5y (cross-check)", "fhfa_cagr5", "pctChange"],
   ["Owner-occupied share", "owner_share", "pctShare"],
@@ -86,15 +86,17 @@ function notes(p) {
     out.push({
       kind: "warn",
       text:
-        `Value check: Census ACS reports ${FORMATTERS.usd(p.home_value)} for this tract, ` +
-        `but that median covers only its ${FORMATTERS.num0(p.owner_units ?? 0)} owner-occupied units. ` +
-        `Zillow's typical value for the area is ${FORMATTERS.usd(p.zhvi)}. Read the two together.`,
+        `Value check: the two sources disagree by more than 2x for this tract. ` +
+        `Zillow's typical value is ${FORMATTERS.usd(p.home_value)}; the Census ACS median is ` +
+        `${FORMATTERS.usd(p.acs_value)}, but that median covers only its ` +
+        `${FORMATTERS.num0(p.owner_units ?? 0)} owner-occupied units, so it reads far too low ` +
+        `in condo and apartment tracts. The map and rankings use the Zillow figure.`,
     });
-  } else if (p.value_source === "zhvi") {
+  } else if (p.value_source === "acs") {
     out.push({
       kind: "info",
-      text: "Home value is a Zillow estimate: Census publishes no median here " +
-        "(the tract has almost no owner-occupied homes).",
+      text: "Home value here falls back to the Census ACS median: Zillow " +
+        "publishes no ZHVI typical value for this tract.",
     });
   }
   if (p.crime_source && CRIME_SOURCE_TEXT[p.crime_source]) {

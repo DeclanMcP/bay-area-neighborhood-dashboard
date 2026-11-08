@@ -31,7 +31,7 @@ export function renderChecks(el, features) {
 
   const hv = coverage(features, "home_value");
   const hvSrc = countBy(features, "value_source");
-  items.push(item("PASS", `Median home value on ${hv.toLocaleString()} tracts (${pct(hv, n)}): ${hvSrc.acs ?? 0} Census, ${hvSrc.zhvi ?? 0} labeled Zillow estimates.`));
+  items.push(item("PASS", `Home value (Zillow ZHVI) on ${hv.toLocaleString()} tracts (${pct(hv, n)}): ${hvSrc.zhvi ?? 0} Zillow typical values, ${hvSrc.acs ?? 0} Census ACS medians as fallback. ACS medians remain in each panel as a cross-check.`));
 
   const gr = coverage(features, "zhvi_cagr5");
   const fhfa = coverage(features, "fhfa_cagr5");

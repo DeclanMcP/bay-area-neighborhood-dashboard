@@ -81,7 +81,7 @@ const DIMS = {
   afford: {
     label: "Affordability", short: "affordability", invert: true,
     measure: (p) => p.home_value,
-    inputs: (p) => `median home value ${usd(p.home_value)}`,
+    inputs: (p) => `typical home value ${usd(p.home_value)} (Zillow ZHVI)`,
   },
   safety: {
     label: "Safety", short: "safety", invert: true,
@@ -411,7 +411,7 @@ export function buildRankings({ features, onSelect, limit = 12 }) {
       const g = profile.gates;
       profileNoteEl.textContent =
         `${profile.blurb} Tracts are gated to ${usd(g.minValue)}-${usd(g.maxValue)} ` +
-        `median value and population ${g.minPop}+; ${ranked.length.toLocaleString("en-US")} ` +
+        `typical value (Zillow ZHVI) and population ${g.minPop}+; ${ranked.length.toLocaleString("en-US")} ` +
         `tracts ranked. Dimensions a tract cannot be scored on re-weight and are ` +
         `badged. Click a row to inspect that tract on the map.`;
     }

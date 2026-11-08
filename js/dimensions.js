@@ -31,13 +31,16 @@ const DIVERGE = ["#b2182b", "#ef8a62", "#fddbc7", "#f7f7f7", "#d1e5f0", "#67a9cf
 export const DIMENSIONS = [
   // --- Housing & value -------------------------------------------------
   {
-    key: "home_value", label: "Median Home Value", group: "Housing & value",
+    key: "home_value", label: "Home Value (Zillow ZHVI)", group: "Housing & value",
     format: "usd", legendFormat: "usdCompact", scale: "seq", palette: MONEY,
-    about: "Median home value per tract. Census ACS 2023 where it exists; where ACS " +
-      "publishes no median (tracts with almost no owner-occupied homes), the tract's " +
-      "Zillow ZHVI value is used and labeled as a Zillow estimate in the panel. " +
-      "Tracts outlined in amber disagree between ACS and Zillow by more than 2x; " +
-      "click one to see both numbers.",
+    about: "Typical home value per tract from Zillow's ZHVI (ZIP level, mapped " +
+      "to tracts). This is the price basis for the map and the rankings. It " +
+      "replaced Census ACS medians as the primary measure on 2026-11-08: ACS " +
+      "medians cover only a tract's owner-occupied stock and read far too low " +
+      "in condo and apartment tracts (one Mountain View tract: ACS $433k vs " +
+      "Zillow $2.25M). Where Zillow publishes no value, the ACS median is the " +
+      "fallback and the panel says so. Tracts outlined in amber disagree " +
+      "between the two sources by more than 2x; click one to see both numbers.",
   },
   {
     key: "zhvi_cagr5", label: "Value Growth (Zillow 5y)", group: "Housing & value",
