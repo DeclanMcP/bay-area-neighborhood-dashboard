@@ -118,6 +118,54 @@ const TYPE_LABELS = {
   House: "single-family", Townhouse: "townhouse", Condo: "condo", Land: "land/lot",
 };
 
+// Expandable breakdown of a place's top-tract score: each dimension's
+// 0-100 subscore (a percentile among the ranked tracts), the weight it
+// carries in the composite, and the points it contributes - the points
+// sum to the overall score. When safety is not scored (no crime feed),
+// the remaining weights are scaled up so they still total 100%.
+function breakdownHtml(r, rankedCount) {
+  const p = r.feature.properties;
+  const W = PERSONAS.young_family.weights;
+  const chg = typeof p.school_change_area === "number"
+    ? `${FORMATTERS.ppChange(p.school_change_area)} 2019→2025`
+    : "2019→2025 change n/a (ranked at the median)";
+  const parts = [
+    { name: "Schools", comp: r.schools, w: W.schools,
+      inputs: `${Math.round(p.school_prof_area)}% proficient (ZIP area) · ${chg} · ` +
+        `${FORMATTERS.ppChange(p.proj_school_chg_5y)} projected 5y` },
+    { name: "Price performance", comp: r.pricePerf, w: W.pricePerf,
+      inputs: `value growth ${FORMATTERS.pctChange(p.zhvi_cagr5)}/yr (Zillow 5y) · ` +
+        `${FORMATTERS.pctChange(p.proj_value_chg_5y)} projected 5y` },
+    { name: "Affordability", comp: r.afford, w: W.afford,
+      inputs: `median home value ${FORMATTERS.usd(p.home_value)}` },
+  ];
+  if (r.safety !== null) {
+    parts.push({ name: "Safety", comp: r.safety, w: W.safety,
+      inputs: `violent ${p.crime_violent}/1k/yr · property ${p.crime_property}/1k/yr` });
+  }
+  const wsum = parts.reduce((s, x) => s + x.w, 0);
+  const rows = parts.map((x) => {
+    const eff = x.w / wsum;
+    return `<tr><td>${x.name}<span class="bd-inputs">${x.inputs}</span></td>` +
+      `<td class="bd-num">${Math.round(x.comp)}</td>` +
+      `<td class="bd-num">${Math.round(eff * 100)}%</td>` +
+      `<td class="bd-num">${(x.comp * eff).toFixed(1)}</td></tr>`;
+  }).join("");
+  const safetyNote = r.safety === null
+    ? `<p class="bd-note">Safety is not scored for this tract (no geocoded crime ` +
+      `feed covers it), so the other weights are scaled up to 100%.</p>`
+    : "";
+  return `<details class="pick-breakdown"><summary>Score breakdown</summary>` +
+    `<p class="bd-tract">For ${p.place ?? "Unknown area"}'s top tract (${p.county} ` +
+    `County · tract ${p.tract}) · overall score ${Math.round(r.score)} of 100</p>` +
+    `<table class="bd-table"><thead><tr><th>Dimension</th><th>Score</th>` +
+    `<th>Weight</th><th>Points</th></tr></thead><tbody>${rows}</tbody></table>` +
+    safetyNote +
+    `<p class="bd-note">Dimension scores are 0-100 percentiles among the ` +
+    `${rankedCount.toLocaleString("en-US")} ranked tracts. Points = score × weight, ` +
+    `and the points add up to the overall score (rounding aside).</p></details>`;
+}
+
 function renderPicks(ranked, type = "all") {
   const el = document.getElementById("picks-list");
   if (!el) return;
@@ -128,7 +176,7 @@ function renderPicks(ranked, type = "all") {
     const place = r.feature.properties.place ?? "Unknown area";
     if (seen.has(place)) continue;
     seen.add(place);
-    leaders.push({ place, score: r.score });
+    leaders.push({ place, r });
     if (leaders.length >= 6) break;
   }
   // Any place with Zillow picks on file always shows, even when its best
@@ -138,14 +186,16 @@ function renderPicks(ranked, type = "all") {
     const best = ranked.find((r) => (r.feature.properties.place ?? "") === place);
     if (best) {
       seen.add(place);
-      leaders.push({ place, score: best.score });
+      leaders.push({ place, r: best });
     }
   }
-  el.innerHTML = leaders.map(({ place, score }) => {
+  el.innerHTML = leaders.map(({ place, r }) => {
+    const score = r.score;
     const city = PLACE_ALIASES[place] ?? place;
     const label = city !== place ? `${place} · ${city}` : place;
     const head =
-      `<h3 class="pick-place">${label} <span class="pick-score">top tract score ${Math.round(score)}</span></h3>`;
+      `<h3 class="pick-place">${label} <span class="pick-score">top tract score ${Math.round(score)}</span></h3>` +
+      breakdownHtml(r, ranked.length);
     const all = ZILLOW_PICKS[city];
     if (!all || !all.length) {
       return head + `<p class="pick-none">No Zillow picks on file for this area yet.</p>`;
