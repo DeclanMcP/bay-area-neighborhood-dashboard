@@ -11,6 +11,8 @@ export const ZILLOW_PICKS = {
     { address: "2493 Warren Rd", price: 789000, beds: 4, baths: 5, sqft: 2941, lot: "0.31-acre lot", type: "House", days: 2, note: "", url: "https://www.zillow.com/homedetails/2493-Warren-Rd-Walnut-Creek-CA-94595/18417927_zpid/" },
     { address: "3055 Arbolado Dr", price: 995000, beds: 4, baths: 3, sqft: 2376, lot: "0.30-acre lot", type: "House", days: 4, note: "", url: "https://www.zillow.com/homedetails/3055-Arbolado-Dr-Walnut-Creek-CA-94598/18377486_zpid/" },
     { address: "2861 Buena Vista Ave", price: 899000, beds: 3, baths: 2, sqft: 1196, lot: "0.25-acre lot", type: "House", days: 5, note: "", url: "https://www.zillow.com/homedetails/2861-Buena-Vista-Ave-Walnut-Creek-CA-94597/18407147_zpid/" },
+    { address: "40 Rodrigues Ln", price: 525000, beds: null, baths: null, sqft: null, lot: "1.83 acres", type: "Land", days: 3, note: "Unimproved land in a gated community, marketed as a build-your-dream-home lot.", url: "https://www.zillow.com/homedetails/40-Rodrigues-Ln-Walnut-Creek-CA-94597/95395286_zpid/" },
+    { address: "1549 Arkell Rd", price: 429000, beds: null, baths: null, sqft: null, lot: "8,276 sqft", type: "Land", days: 18, note: "Rare flat lot, newly created parcel.", url: "https://www.zillow.com/homedetails/1549-Arkell-Rd-Walnut-Creek-CA-94598/466142072_zpid/" },
   ],
   "San Bruno": [
     { address: "998 Hensley Ave", price: 1195000, beds: 5, baths: 3, sqft: 1913, lot: "2,499 sqft lot", type: "House", days: 3, note: "", url: "https://www.zillow.com/homedetails/998-Hensley-Ave-San-Bruno-CA-94066/15496375_zpid/" },
@@ -26,26 +28,35 @@ export const ZILLOW_PICKS = {
     { address: "706 S Jackson Ave", price: 899888, beds: 4, baths: 2, sqft: 1242, lot: "6,000 sqft lot", type: "House", days: null, note: "", url: "https://www.zillow.com/homedetails/706-S-Jackson-Ave-San-Jose-CA-95116/19723964_zpid/" },
     { address: "221 Beegum Way", price: 1149900, beds: 3, baths: 3, sqft: 1546, lot: "5,000 sqft lot", type: "House", days: null, note: "Price cut $50,000 on Oct 20.", url: "https://www.zillow.com/homedetails/221-Beegum-Way-San-Jose-CA-95123/19828107_zpid/" },
     { address: "1139 Bendmill Way", price: 999000, beds: 4, baths: 2, sqft: 1542, lot: "6,420 sqft lot", type: "House", days: 1, note: "", url: "https://www.zillow.com/homedetails/1139-Bendmill-Way-San-Jose-CA-95121/19741369_zpid/" },
+    { address: "819 Boulder Dr", price: 288000, beds: null, baths: null, sqft: null, lot: "0.47 acres", type: "Land", days: 2, note: "Level residential lot, zoned R1B1, public sewer.", url: "https://www.zillow.com/homedetails/819-Boulder-Dr-San-Jose-CA-95132/153466762_zpid/" },
+    { address: "915 E Julian St", price: 550000, beds: null, baths: null, sqft: null, lot: "4,356 sqft", type: "Land", days: 44, note: "Downtown infill lot; price cut $50,000 on Oct 8. Photos show a small existing florist building on the lot.", url: "https://www.zillow.com/homedetails/915-E-Julian-St-San-Jose-CA-95112/448917472_zpid/" },
   ],
   "Fremont": [
     { address: "42650 Isle Royal St", price: 1100000, beds: 3, baths: 2, sqft: 1581, lot: "5,700 sqft lot", type: "House", days: 11, note: "", url: "https://www.zillow.com/homedetails/42650-Isle-Royal-St-Fremont-CA-94538/25040188_zpid/" },
     { address: "3864 Jamestown Rd", price: 1198000, beds: 3, baths: 2, sqft: 1112, lot: "5,310 sqft lot", type: "House", days: 24, note: "", url: "https://www.zillow.com/homedetails/3864-Jamestown-Rd-Fremont-CA-94538/25041104_zpid/" },
     { address: "39656 Iolani Ct", price: 1199900, beds: 3, baths: 2, sqft: 1067, lot: "5,723 sqft lot", type: "House", days: 30, note: "Price cut $50,000 on Nov 5.", url: "https://www.zillow.com/homedetails/39656-Iolani-Ct-Fremont-CA-94538/25044465_zpid/" },
+    { address: "3279 Washington Blvd", price: 1199000, beds: null, baths: null, sqft: null, lot: "8,572 sqft", type: "Land", days: 164, note: "Level lot in Mission San Jose; cut from $1,300,000 in June.", url: "https://www.zillow.com/homedetails/3279-Washington-Blvd-Fremont-CA-94539/299072505_zpid/" },
+    { address: "Undisclosed address, 94538", price: 199999, beds: null, baths: null, sqft: null, lot: "3,000 sqft", type: "Land", days: 58, note: "Undeveloped raw land, surveyed.", url: "https://www.zillow.com/homedetails/Fremont-CA-94538/444776316_zpid/" },
   ],
   "San Mateo": [
     { address: "221 N Delaware St", price: 1198000, beds: 3, baths: 2, sqft: 1070, lot: "6,038 sqft lot", type: "House", days: 22, note: "", url: "https://www.zillow.com/homedetails/221-N-Delaware-St-San-Mateo-CA-94401/15522187_zpid/" },
     { address: "3419 La Selva St", price: 998000, beds: 2, baths: 2, sqft: 1190, lot: "1,612 sqft lot", type: "House", days: 43, note: "Listing page shows a $555/mo HOA.", url: "https://www.zillow.com/homedetails/3419-La-Selva-St-San-Mateo-CA-94403/15541037_zpid/" },
     { address: "927 Shoreline Dr", price: 1150000, beds: 3, baths: 2, sqft: 1570, lot: "", type: "Condo", days: 23, note: "Price cut $48,000 on Nov 4.", url: "https://www.zillow.com/homedetails/927-Shoreline-Dr-San-Mateo-CA-94404/15630107_zpid/" },
+    { address: "0 Parrott Dr", price: 699000, beds: null, baths: null, sqft: null, lot: "0.92 acres", type: "Land", days: 283, note: "Residential lot, zoned R1-A. The only San Mateo lot under the cap.", url: "https://www.zillow.com/homedetails/0-Parrott-Dr-San-Mateo-CA-94402/460029256_zpid/" },
   ],
   "Redwood City": [
     { address: "827 Chestnut St", price: 989000, beds: 2, baths: 1, sqft: 1160, lot: "5,020 sqft lot", type: "House", days: 15, note: "", url: "https://www.zillow.com/homedetails/827-Chestnut-St-Redwood-City-CA-94063/15566021_zpid/" },
     { address: "930 Haven Ave", price: 998000, beds: 2, baths: 1, sqft: 1000, lot: "5,000 sqft lot", type: "House", days: 5, note: "", url: "https://www.zillow.com/homedetails/930-Haven-Ave-Redwood-City-CA-94063/15568572_zpid/" },
     { address: "327 Center St", price: 898000, beds: 2, baths: 1, sqft: 800, lot: "6,098 sqft lot", type: "House", days: 2, note: "", url: "https://www.zillow.com/homedetails/327-Center-St-Redwood-City-CA-94061/15566443_zpid/" },
+    { address: "2 Laurel Way", price: 520000, beds: null, baths: null, sqft: null, lot: "8,633 sqft", type: "Land", days: 16, note: "Emerald Lake Hills lot, marketed as build-your-dream-home.", url: "https://www.zillow.com/homedetails/2-Laurel-Way-Redwood-City-CA-94062/466189081_zpid/" },
+    { address: "Undisclosed address (Lot 80), 94062", price: 545000, beds: null, baths: null, sqft: null, lot: "9,100 sqft", type: "Land", days: 16, note: "Quiet cul-de-sac lot; price cut $304,000 on Nov 7.", url: "https://www.zillow.com/homedetails/Redwood-City-CA-94062/466189082_zpid/" },
   ],
   "Castro Valley": [
     { address: "18639 Lake Chabot Rd", price: 1098000, beds: 3, baths: 2, sqft: 1996, lot: "5,000 sqft lot", type: "House", days: 2, note: "", url: "https://www.zillow.com/homedetails/18639-Lake-Chabot-Rd-Castro-Valley-CA-94546/24906652_zpid/" },
     { address: "16972 Rolando Ave", price: 998000, beds: 4, baths: 2, sqft: 1665, lot: "6,344 sqft lot", type: "House", days: 44, note: "", url: "https://www.zillow.com/homedetails/16972-Rolando-Ave-Castro-Valley-CA-94546/24894405_zpid/" },
     { address: "17494 Ehle St", price: 880000, beds: 3, baths: 2, sqft: 1509, lot: "6,098 sqft lot", type: "House", days: 22, note: "Price cut $15,000 on Nov 6.", url: "https://www.zillow.com/homedetails/17494-Ehle-St-Castro-Valley-CA-94546/24905185_zpid/" },
+    { address: "6733 Sunnyslope Ave", price: 425000, beds: null, baths: null, sqft: null, lot: "0.49 acres", type: "Land", days: 86, note: "Fenced, sloped lot in the Sunnyslope Village subdivision.", url: "https://www.zillow.com/homedetails/6733-Sunnyslope-Ave-Castro-Valley-CA-94552/299077212_zpid/" },
+    { address: "21479 Eden Canyon Rd", price: 699800, beds: null, baths: null, sqft: null, lot: "9.81 acres", type: "Land", days: 65, note: "Large canyon parcel with panoramic views.", url: "https://www.zillow.com/homedetails/21479-Eden-Canyon-Rd-Castro-Valley-CA-94552/440132289_zpid/" },
   ],
 };
 
