@@ -114,7 +114,11 @@ export function rankTracts(features, personaKey = "young_family") {
   return finite;
 }
 
-function renderPicks(ranked) {
+const TYPE_LABELS = {
+  House: "single-family", Townhouse: "townhouse", Condo: "condo", Land: "land/lot",
+};
+
+function renderPicks(ranked, type = "all") {
   const el = document.getElementById("picks-list");
   if (!el) return;
   // Place leaders: the first (highest-scoring) tract per place, top 6 places.
@@ -142,9 +146,14 @@ function renderPicks(ranked) {
     const label = city !== place ? `${place} · ${city}` : place;
     const head =
       `<h3 class="pick-place">${label} <span class="pick-score">top tract score ${Math.round(score)}</span></h3>`;
-    const picks = ZILLOW_PICKS[city];
-    if (!picks || !picks.length) {
+    const all = ZILLOW_PICKS[city];
+    if (!all || !all.length) {
       return head + `<p class="pick-none">No Zillow picks on file for this area yet.</p>`;
+    }
+    const picks = type === "all" ? all : all.filter((p) => p.type === type);
+    if (!picks.length) {
+      return head +
+        `<p class="pick-none">No ${TYPE_LABELS[type] ?? type} picks for this area in the current pull.</p>`;
     }
     return head + picks.map((p) => {
       const spec = [
@@ -172,9 +181,20 @@ export function buildRankings({ features, onSelect, limit = 12 }) {
   const noteEl = document.getElementById("picks-note");
   if (noteEl) noteEl.textContent = PICKS_NOTE;
 
+  let currentType = "all";
+  let currentRanked = [];
+  const typeEl = document.getElementById("ptype-select");
+  if (typeEl) {
+    typeEl.addEventListener("change", () => {
+      currentType = typeEl.value;
+      renderPicks(currentRanked, currentType);
+    });
+  }
+
   function render(personaKey) {
     const ranked = rankTracts(features, personaKey);
-    renderPicks(ranked);
+    currentRanked = ranked;
+    renderPicks(ranked, currentType);
     listEl.innerHTML = "";
     ranked.slice(0, limit).forEach((r, i) => {
       const p = r.feature.properties;

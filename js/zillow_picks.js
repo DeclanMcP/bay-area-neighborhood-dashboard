@@ -56,4 +56,5 @@ export const PICKS_NOTE =
   "Pulled from live Zillow searches on Nov 7, 2026 with a $1.2M cap; every " +
   "pick was opened on its Zillow page and confirmed for sale at this price " +
   "that evening. Listings change fast, so each address links straight to " +
-  "the live Zillow listing.";
+  "the live Zillow listing. The property-type filter applies to these " +
+  "picks; the ranking itself scores whole neighborhoods across all types.";
