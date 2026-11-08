@@ -21,7 +21,7 @@
 
 import { FORMATTERS } from "./dimensions.js";
 import { median } from "./data.js";
-import { ZILLOW_PICKS, PICKS_NOTE } from "./zillow_picks.js";
+import { ZILLOW_PICKS, PLACE_ALIASES, PICKS_NOTE } from "./zillow_picks.js";
 
 export const PERSONAS = {
   young_family: {
@@ -138,21 +138,29 @@ function renderPicks(ranked) {
     }
   }
   el.innerHTML = leaders.map(({ place, score }) => {
+    const city = PLACE_ALIASES[place] ?? place;
+    const label = city !== place ? `${place} · ${city}` : place;
     const head =
-      `<h3 class="pick-place">${place} <span class="pick-score">top tract score ${Math.round(score)}</span></h3>`;
-    const picks = ZILLOW_PICKS[place];
+      `<h3 class="pick-place">${label} <span class="pick-score">top tract score ${Math.round(score)}</span></h3>`;
+    const picks = ZILLOW_PICKS[city];
     if (!picks || !picks.length) {
       return head + `<p class="pick-none">No Zillow picks on file for this area yet.</p>`;
     }
     return head + picks.map((p) => {
-      const spec = [p.beds ? `${p.beds} bd` : null, p.baths ? `${p.baths} ba` : null]
-        .filter(Boolean).join(" · ");
+      const spec = [
+        p.type,
+        p.beds ? `${p.beds} bd` : null,
+        p.baths ? `${p.baths} ba` : null,
+        p.sqft ? `${p.sqft.toLocaleString("en-US")} sqft` : null,
+        p.lot || null,
+        p.days != null ? `${p.days} days on Zillow` : null,
+      ].filter(Boolean).join(" · ");
       return `<div class="pick-row">` +
-        `<span class="pick-addr">${p.address}</span>` +
+        `<a class="pick-addr" href="${p.url}" target="_blank" rel="noopener">${p.address} ↗</a>` +
         `<span class="pick-price">${FORMATTERS.usd(p.price)}</span>` +
         (spec ? `<span class="pick-meta">${spec}</span>` : "") +
-        `<span class="pick-note">${p.note}</span>` +
-        `<span class="pick-src">${p.source}</span></div>`;
+        (p.note ? `<span class="pick-note">${p.note}</span>` : "") +
+        `<span class="pick-src">Live on Zillow · checked Nov 7</span></div>`;
     }).join("");
   }).join("");
 }

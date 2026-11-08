@@ -134,7 +134,8 @@ body {
 .pick-score { color: var(--accent); font-size: 0.78rem; font-weight: 600; }
 .pick-none { color: var(--muted); font-size: 0.84rem; margin: 0 0 0.4rem; }
 .pick-row { display: grid; grid-template-columns: 1fr auto; gap: 0.05rem 0.7rem; border-top: 1px solid var(--line); padding: 0.45rem 0; }
-.pick-addr { font-weight: 600; font-size: 0.9rem; }
+.pick-addr { font-weight: 600; font-size: 0.9rem; color: var(--accent); text-decoration: none; }
+.pick-addr:hover { text-decoration: underline; }
 .pick-price { font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
 .pick-meta { color: var(--muted); font-size: 0.8rem; }
 .pick-note { grid-column: 1 / 3; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
