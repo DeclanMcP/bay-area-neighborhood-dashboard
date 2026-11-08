@@ -203,6 +203,22 @@ function selectTract(feature, zoom = false) {
   if (zoom) state.choro.zoomTo([feature]);
 }
 
+// Top-level views: the map (with its dimension tabs) and the Rankings tab.
+function setView(name) {
+  document.querySelectorAll(".view-btn").forEach((b) =>
+    b.classList.toggle("active", b.dataset.view === name));
+  document.getElementById("view-map").hidden = name !== "map";
+  document.getElementById("view-rankings").hidden = name !== "rankings";
+  if (name === "map" && state.map && state.map.invalidateSize) {
+    state.map.invalidateSize();
+  }
+}
+
+function wireViewTabs() {
+  document.querySelectorAll(".view-btn").forEach((b) =>
+    b.addEventListener("click", () => setView(b.dataset.view)));
+}
+
 function wireToggles() {
   // Mode buttons carry data-mode; horizon buttons share the .mode-btn
   // styling class but must never be treated as mode switches.
@@ -215,6 +231,7 @@ function wireToggles() {
 async function main() {
   buildTabs();
   wireToggles();
+  wireViewTabs();
   let features;
   try {
     features = await loadTracts();
@@ -226,6 +243,7 @@ async function main() {
   }
   state.features = features;
   const map = createMap("map");
+  state.map = map;
   state.choro = new Choropleth(map, features, (f) => selectTract(f));
   buildFinder({
     features,
@@ -237,7 +255,10 @@ async function main() {
   });
   buildRankings({
     features,
-    onSelect: (f, zoom) => selectTract(f, zoom),
+    onSelect: (f, zoom) => {
+      setView("map");
+      selectTract(f, zoom);
+    },
   });
   renderChecks(document.getElementById("dataset-checks"), features);
   selectDimension(state.entry);

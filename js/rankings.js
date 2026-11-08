@@ -21,6 +21,7 @@
 
 import { FORMATTERS } from "./dimensions.js";
 import { median } from "./data.js";
+import { ZILLOW_PICKS, PICKS_NOTE } from "./zillow_picks.js";
 
 export const PERSONAS = {
   young_family: {
@@ -113,13 +114,59 @@ export function rankTracts(features, personaKey = "young_family") {
   return finite;
 }
 
+function renderPicks(ranked) {
+  const el = document.getElementById("picks-list");
+  if (!el) return;
+  // Place leaders: the first (highest-scoring) tract per place, top 6 places.
+  const seen = new Set();
+  const leaders = [];
+  for (const r of ranked) {
+    const place = r.feature.properties.place ?? "Unknown area";
+    if (seen.has(place)) continue;
+    seen.add(place);
+    leaders.push({ place, score: r.score });
+    if (leaders.length >= 6) break;
+  }
+  // Any place with Zillow picks on file always shows, even when its best
+  // tract ranks below the leaders (Redwood City is the current case).
+  for (const place of Object.keys(ZILLOW_PICKS)) {
+    if (seen.has(place)) continue;
+    const best = ranked.find((r) => (r.feature.properties.place ?? "") === place);
+    if (best) {
+      seen.add(place);
+      leaders.push({ place, score: best.score });
+    }
+  }
+  el.innerHTML = leaders.map(({ place, score }) => {
+    const head =
+      `<h3 class="pick-place">${place} <span class="pick-score">top tract score ${Math.round(score)}</span></h3>`;
+    const picks = ZILLOW_PICKS[place];
+    if (!picks || !picks.length) {
+      return head + `<p class="pick-none">No Zillow picks on file for this area yet.</p>`;
+    }
+    return head + picks.map((p) => {
+      const spec = [p.beds ? `${p.beds} bd` : null, p.baths ? `${p.baths} ba` : null]
+        .filter(Boolean).join(" · ");
+      return `<div class="pick-row">` +
+        `<span class="pick-addr">${p.address}</span>` +
+        `<span class="pick-price">${FORMATTERS.usd(p.price)}</span>` +
+        (spec ? `<span class="pick-meta">${spec}</span>` : "") +
+        `<span class="pick-note">${p.note}</span>` +
+        `<span class="pick-src">${p.source}</span></div>`;
+    }).join("");
+  }).join("");
+}
+
 export function buildRankings({ features, onSelect, limit = 12 }) {
   const listEl = document.getElementById("ranking-list");
   const selectEl = document.getElementById("persona-select");
   if (!listEl) return;
+  const noteEl = document.getElementById("picks-note");
+  if (noteEl) noteEl.textContent = PICKS_NOTE;
 
   function render(personaKey) {
     const ranked = rankTracts(features, personaKey);
+    renderPicks(ranked);
     listEl.innerHTML = "";
     ranked.slice(0, limit).forEach((r, i) => {
       const p = r.feature.properties;
