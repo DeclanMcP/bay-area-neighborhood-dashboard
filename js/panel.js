@@ -10,6 +10,7 @@ const ROWS = [
   ["Median age", "median_age", "years"],
   ["Median household income", "income", "usd"],
   ["Bachelor's degree or higher", "bach_share", "pctShare"],
+  ["Households with children", "hh_kids_share", "pctShare"],
   ["Median home value", "home_value", "usd"],
   ["Median gross rent", "rent", "usd"],
   ["Walkability, EPA index (of 20)", "walk_index", "num1"],

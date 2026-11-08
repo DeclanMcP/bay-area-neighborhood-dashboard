@@ -74,20 +74,19 @@
   <div class="rankings-layout">
     <section class="card rankings">
       <h2>Rankings</h2>
-      <label class="persona-label">Demographic
-        <select id="persona-select" aria-label="Ranking demographic">
+      <label class="persona-label">Who's searching
+        <select id="persona-select" aria-label="Ranking profile">
           <option value="young_family" selected>Young family</option>
-          <option value="retirees" disabled>Retirees (coming later)</option>
-          <option value="investor" disabled>Investor (coming later)</option>
-          <option value="first_time" disabled>First-time buyer (coming later)</option>
+          <option value="retirees">Retirees</option>
+          <option value="investor">Investor</option>
+          <option value="first_time">First-time buyer</option>
+          <option value="custom" disabled>Custom (coming later)</option>
         </select>
       </label>
-      <p class="rankings-note">Young family with $500k saved. Score: schools level +
-        momentum 35%, price performance (past 5y growth + projected) 25%,
-        affordability 20%, safety 20% where a crime feed covers the tract
-        (otherwise the other factors re-weight and the row is badged).
-        Tracts are gated to $500k-$1.35M median value. Click a row to
-        inspect that tract on the map.</p>
+      <p class="rankings-note" id="profile-note">Every profile is the same set of
+        questions - a value band, weights per dimension, and which dimensions
+        are required - with different default answers. Dimensions are scored
+        as 0-100 percentiles among the gated tracts.</p>
       <div id="ranking-list" class="ranking-list"></div>
     </section>
 
@@ -111,7 +110,8 @@
 <footer class="app-footer">
   <p>Sources: Census ACS 2023 5-year and 2020 Census (PL), Zillow ZHVI, FHFA HPI,
     FEMA National Risk Index, CAASPP, SFPD / Oakland PD / Sonoma County Sheriff,
-    CalEnviroScreen 4.0, CA FAIR Plan, Open-Meteo (ERA5). Projections are
+    CalEnviroScreen 4.0, CA FAIR Plan, Open-Meteo (ERA5), EPA Smart Location
+    Database, US DOT BTS National Transportation Noise Map. Projections are
     backtested per dimension; methods, scores, and rejected alternatives live in
     the project repo (docs/PROJECTIONS.md, docs/DATA_SOURCES.md,
     docs/ADVERSARIAL_REVIEW.md).</p>

@@ -88,6 +88,14 @@ export const DIMENSIONS = [
     about: "Share of residents age 25+ holding a bachelor's degree or higher, " +
       "Census ACS 2023 5-year. Was already in every tract panel; now mappable.",
   },
+  {
+    key: "hh_kids_share", label: "Households With Children", group: "People",
+    format: "pctShare", scale: "seq", palette: PURPLE,
+    about: "Share of households with one or more people under 18, Census ACS " +
+      "2023 5-year, table B11005. The family-presence measure: higher means " +
+      "more households here are raising children. Regional share is about " +
+      "31%; tracts with very few households are noisy.",
+  },
   // --- Getting around & noise ------------------------------------------
   {
     key: "walk_index", label: "Walkability (EPA index)", group: "Getting around & noise",

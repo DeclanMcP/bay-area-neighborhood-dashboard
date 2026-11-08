@@ -40,6 +40,9 @@ export function renderChecks(el, features) {
   const age = coverage(features, "median_age");
   items.push(item("PASS", `Median age on ${age.toLocaleString()} tracts (${pct(age, n)}).`));
 
+  const hk = coverage(features, "hh_kids_share");
+  items.push(item("PASS", `Households with children (ACS B11005) on ${hk.toLocaleString()} tracts (${pct(hk, n)}).`));
+
   const pg = coverage(features, "pop_growth");
   const noisy = features.filter((f) => f.properties.pop_flag === "within_noise").length;
   items.push(item("NOTE", `Population growth on ${pg.toLocaleString()} tracts; ${noisy.toLocaleString()} of them are within the ACS margin of error and drawn faded.`));
