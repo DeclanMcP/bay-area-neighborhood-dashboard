@@ -15,6 +15,7 @@ const ROWS = [
   ["Median gross rent", "rent", "usd"],
   ["Walkability, EPA index (of 20)", "walk_index", "num1"],
   ["Transit frequency (services/hr, PM peak)", "transit_freq", "num1"],
+  ["Commute to Menlo Park (min, free-flow drive)", "commute_menlo_min", "num0"],
   ["Distance to nearest transit stop (m)", "transit_dist", "num0"],
   ["Share of tract with transit service", "transit_served", "pctShare"],
   ["Jobs within 45 min by car", "jobs_auto", "num0"],

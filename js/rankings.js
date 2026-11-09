@@ -106,6 +106,11 @@ const DIMS = {
     measure: (p) => p.transit_freq,
     inputs: (p) => `${p.transit_freq} services/hr at PM peak (EPA)`,
   },
+  commute: {
+    label: "Commute to Menlo Park", short: "commute", invert: true,
+    measure: (p) => p.commute_menlo_min,
+    inputs: (p) => `${Math.round(p.commute_menlo_min)} min free-flow drive to Menlo Park (OSRM; peak runs longer)`,
+  },
   quiet: {
     label: "Quiet (low traffic noise)", short: "quiet", invert: true,
     measure: (p) => p.noise_share55,
@@ -174,7 +179,7 @@ export const PROFILES = {
       "for a little. Schools and price performance are required.",
     gates: { minPop: 500, minValue: 500_000, maxValue: 1_350_000 },
     require: ["schools", "pricePerf"],
-    weights: { schools: 30, safety: 18, afford: 14, pricePerf: 12, families: 8, walk: 6, quiet: 5, air: 4, younger: 3 },
+    weights: { schools: 27, safety: 16, afford: 12, pricePerf: 10, commute: 12, families: 7, walk: 5, quiet: 4, air: 4, younger: 3 },
   },
   retirees: {
     label: "Retirees",
@@ -191,7 +196,7 @@ export const PROFILES = {
       "then price performance, safety, walkability and transit.",
     gates: { minPop: 500, minValue: 400_000, maxValue: 1_000_000 },
     require: ["pricePerf"],
-    weights: { afford: 30, pricePerf: 16, safety: 12, walk: 10, transit: 8, schools: 8, quiet: 4, air: 4, families: 4, growth: 4 },
+    weights: { afford: 27, pricePerf: 14, safety: 11, commute: 8, walk: 9, transit: 7, schools: 8, quiet: 4, air: 4, families: 4, growth: 4 },
   },
   investor: {
     label: "Investor",

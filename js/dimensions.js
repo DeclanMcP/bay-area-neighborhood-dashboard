@@ -121,6 +121,16 @@ export const DIMENSIONS = [
       "distance to the nearest stop and jobs reachable in 45 minutes.",
   },
   {
+    key: "commute_menlo_min", label: "Commute to Menlo Park", group: "Getting around & noise",
+    format: "num0", scale: "seq", palette: TEAL, unit: "min drive, free-flow",
+    about: "Drive time from the tract centroid to Meta's Menlo Park campus " +
+      "(1 Hacker Way), routed on the OpenStreetMap road network with OSRM at " +
+      "free-flow speeds: no live traffic, so peak-hour drives run longer, " +
+      "especially across the bay crossings. Peninsula tracts run 10-25 " +
+      "minutes; San Francisco about 44; the far North Bay over 90. Darker = " +
+      "longer drive.",
+  },
+  {
     key: "noise_share55", label: "Transport Noise · Area ≥55 dB", group: "Getting around & noise",
     format: "pctShare", scale: "seq", palette: REDS,
     about: "Share of the tract's area where modeled transportation noise reaches " +

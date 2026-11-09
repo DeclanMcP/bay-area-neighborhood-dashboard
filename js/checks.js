@@ -43,6 +43,9 @@ export function renderChecks(el, features) {
   const hk = coverage(features, "hh_kids_share");
   items.push(item("PASS", `Households with children (ACS B11005) on ${hk.toLocaleString()} tracts (${pct(hk, n)}).`));
 
+  const cm = coverage(features, "commute_menlo_min");
+  items.push(item("PASS", `Commute to Menlo Park (OSRM free-flow drive time) on ${cm.toLocaleString()} tracts (${pct(cm, n)}).`));
+
   const pg = coverage(features, "pop_growth");
   const noisy = features.filter((f) => f.properties.pop_flag === "within_noise").length;
   items.push(item("NOTE", `Population growth on ${pg.toLocaleString()} tracts; ${noisy.toLocaleString()} of them are within the ACS margin of error and drawn faded.`));
