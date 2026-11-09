@@ -2,9 +2,11 @@
 // Pulled from live Zillow search on 2026-11-07 (evening PT) with a
 // $1,200,000 price cap in every city: each pick was opened on its own
 // Zillow homedetails page and confirmed "For sale" at the listed price
-// that evening. Prices and availability change; every address links to
-// the live listing so it can be re-checked in one click. Refresh by
-// re-running the same Zillow searches, not from email alerts.
+// that evening. Hercules, Dublin, Martinez and Petaluma picks were
+// pulled the same way on 2026-11-09 (morning PT). Prices and availability
+// change; every address links to the live listing so it can be re-checked
+// in one click. Refresh by re-running the same Zillow searches, not from
+// email alerts.
 
 export const ZILLOW_PICKS = {
   "Walnut Creek": [
@@ -58,6 +60,30 @@ export const ZILLOW_PICKS = {
     { address: "6733 Sunnyslope Ave", price: 425000, beds: null, baths: null, sqft: null, lot: "0.49 acres", type: "Land", days: 86, note: "Fenced, sloped lot in the Sunnyslope Village subdivision.", url: "https://www.zillow.com/homedetails/6733-Sunnyslope-Ave-Castro-Valley-CA-94552/299077212_zpid/" },
     { address: "21479 Eden Canyon Rd", price: 699800, beds: null, baths: null, sqft: null, lot: "9.81 acres", type: "Land", days: 65, note: "Large canyon parcel with panoramic views.", url: "https://www.zillow.com/homedetails/21479-Eden-Canyon-Rd-Castro-Valley-CA-94552/440132289_zpid/" },
   ],
+  "Hercules": [
+    { address: "112 Aster Ct", price: 687000, beds: 3, baths: 1, sqft: 1090, lot: "7,405 sqft lot", type: "House", days: 87, note: "", url: "https://www.zillow.com/homedetails/112-Aster-Ct-Hercules-CA-94547/18503729_zpid/" },
+    { address: "133 Meadowlark Way", price: 695000, beds: 3, baths: 2, sqft: 1555, lot: "9,583 sqft lot", type: "House", days: 24, note: "", url: "https://www.zillow.com/homedetails/133-Meadowlark-Way-Hercules-CA-94547/18505956_zpid/" },
+    { address: "115 Bedford", price: 685000, beds: 3, baths: 2, sqft: 1422, lot: "7,405 sqft lot", type: "House", days: 90, note: "", url: "https://www.zillow.com/homedetails/115-Bedford-Hercules-CA-94547/18503031_zpid/" },
+  ],
+  "Dublin": [
+    { address: "7597 Canterbury Ln", price: 1175000, beds: 3, baths: 2, sqft: 1544, lot: "7,405 sqft lot", type: "House", days: 34, note: "", url: "https://www.zillow.com/homedetails/7597-Canterbury-Ln-Dublin-CA-94568/25063737_zpid/" },
+    { address: "6933 Cedar Ln", price: 1164999, beds: 3, baths: 2, sqft: 1592, lot: "5,399 sqft lot", type: "House", days: 32, note: "", url: "https://www.zillow.com/homedetails/6933-Cedar-Ln-Dublin-CA-94568/25065581_zpid/" },
+    { address: "6963 Portage Rd", price: 1149000, beds: 4, baths: 2, sqft: 1592, lot: "6,012 sqft lot", type: "House", days: 19, note: "", url: "https://www.zillow.com/homedetails/6963-Portage-Rd-Dublin-CA-94568/25065768_zpid/" },
+  ],
+  "Martinez": [
+    { address: "2295 S Crest Ave", price: 688000, beds: 3, baths: 3, sqft: 1484, lot: "8,485 sqft lot", type: "House", days: 79, note: "", url: "https://www.zillow.com/homedetails/2295-S-Crest-Ave-Martinez-CA-94553/18490561_zpid/" },
+    { address: "631 Sherree Ct", price: 1149000, beds: 3, baths: 2, sqft: 1491, lot: "10,454 sqft lot", type: "House", days: 73, note: "", url: "https://www.zillow.com/homedetails/631-Sherree-Ct-Martinez-CA-94553/18402124_zpid/" },
+    { address: "2214 Pacheco Blvd", price: 658500, beds: 3, baths: 2, sqft: 1316, lot: "3,920 sqft lot", type: "House", days: 3, note: "", url: "https://www.zillow.com/homedetails/2214-Pacheco-Blvd-Martinez-CA-94553/18490327_zpid/" },
+    { address: "0 Palm Ave", price: 275000, beds: null, baths: null, sqft: null, lot: "2.66 acres", type: "Land", days: 8, note: "", url: "https://www.zillow.com/homedetails/0-Palm-Ave-Martinez-CA-94553/446403003_zpid/" },
+    { address: "Warren St", price: 100000, beds: null, baths: null, sqft: null, lot: "7,873 sqft", type: "Land", days: 89, note: "", url: "https://www.zillow.com/homedetails/Warren-St-Martinez-CA-94553/249602261_zpid/" },
+  ],
+  "Petaluma": [
+    { address: "2032 Easton Dr", price: 678000, beds: 3, baths: 3, sqft: 1232, lot: "1,838 sqft lot", type: "House", days: 93, note: "", url: "https://www.zillow.com/homedetails/2032-Easton-Dr-Petaluma-CA-94952/54787487_zpid/" },
+    { address: "128 Burlington Dr", price: 635000, beds: 3, baths: 2, sqft: 1400, lot: "6,298 sqft lot", type: "House", days: 45, note: "", url: "https://www.zillow.com/homedetails/128-Burlington-Dr-Petaluma-CA-94952/15752344_zpid/" },
+    { address: "8 Cochrane Way", price: 1195000, beds: 3, baths: 2, sqft: 1811, lot: "7,300 sqft lot", type: "House", days: 72, note: "", url: "https://www.zillow.com/homedetails/8-Cochrane-Way-Petaluma-CA-94952/15755679_zpid/" },
+    { address: "1170 I St", price: 500000, beds: null, baths: null, sqft: null, lot: "0.56 acres", type: "Land", days: 18, note: "", url: "https://www.zillow.com/homedetails/1170-I-St-Petaluma-CA-94952/96058853_zpid/" },
+    { address: "4663 Hillsborough Dr", price: 775000, beds: null, baths: null, sqft: null, lot: "15.34 acres", type: "Land", days: 52, note: "", url: "https://www.zillow.com/homedetails/4663-Hillsborough-Dr-Petaluma-CA-94954/300264816_zpid/" },
+  ],
 };
 
 // Dashboard place names that are neighbourhoods of a Zillow search city.
@@ -66,7 +92,8 @@ export const PLACE_ALIASES = { "Contra Costa Centre": "Walnut Creek" };
 export const PICKS_NOTE =
   "Pulled from live Zillow searches on Nov 7, 2026 with a $1.2M cap; every " +
   "pick was opened on its Zillow page and confirmed for sale at this price " +
-  "that evening. Listings change fast, so each address links straight to " +
+  "that evening. Hercules, Dublin, Martinez and Petaluma picks were added " +
+  "the same way on Nov 9. Listings change fast, so each address links straight to " +
   "the live Zillow listing. Each home also carries its own Home score: " +
   "50% the score of the tract the home actually sits in, 50% the home " +
   "itself (price vs the tract's typical value, fit, and freshness). " +
