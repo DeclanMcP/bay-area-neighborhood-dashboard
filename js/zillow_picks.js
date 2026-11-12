@@ -6,7 +6,9 @@
 // pulled the same way on 2026-11-09 (morning PT). Newark, Castro Valley,
 // San Mateo and Fremont picks were refreshed the same way on 2026-11-10
 // (morning PT). Walnut Creek, San Jose, Dublin and Hercules picks were
-// refreshed the same way on 2026-11-11 (morning PT). Prices and availability
+// refreshed the same way on 2026-11-11 (morning PT). San Bruno, Redwood
+// City, Martinez and Petaluma picks were refreshed the same way on
+// 2026-11-12 (morning PT). Prices and availability
 // change; every address links to the live listing so it can be re-checked
 // in one click. Refresh by re-running the same Zillow searches, not from
 // email alerts.
@@ -22,9 +24,10 @@ export const ZILLOW_PICKS = {
     { address: "1549 Arkell Rd", price: 429000, beds: null, baths: null, sqft: null, lot: "8,276 sqft", type: "Land", days: 18, note: "Rare flat lot, newly created parcel.", url: "https://www.zillow.com/homedetails/1549-Arkell-Rd-Walnut-Creek-CA-94598/466142072_zpid/" },
   ],
   "San Bruno": [
-    { address: "998 Hensley Ave", price: 1195000, beds: 5, baths: 3, sqft: 1913, lot: "2,499 sqft lot", type: "House", days: 3, note: "", url: "https://www.zillow.com/homedetails/998-Hensley-Ave-San-Bruno-CA-94066/15496375_zpid/" },
-    { address: "698 Masson Ave", price: 1188000, beds: 3, baths: 2, sqft: 1530, lot: "2,499 sqft lot", type: "House", days: 32, note: "Price cut $61,000 on Oct 27.", url: "https://www.zillow.com/homedetails/698-Masson-Ave-San-Bruno-CA-94066/15496631_zpid/" },
-    { address: "1055 San Mateo Ave", price: 1198000, beds: 5, baths: 3, sqft: 1500, lot: "5,000 sqft lot", type: "House", days: 46, note: "Price cut $97,000 on Oct 10.", url: "https://www.zillow.com/homedetails/1055-San-Mateo-Ave-San-Bruno-CA-94066/15488972_zpid/" },
+    { address: "1094 Montgomery Ave", price: 849000, beds: 2, baths: 2, sqft: 1059, lot: "2,500 sqft lot", type: "House", days: 13, note: "", url: "https://www.zillow.com/homedetails/1094-Montgomery-Ave-San-Bruno-CA-94066/15488941_zpid/" },
+    { address: "998 Hensley Ave", price: 1195000, beds: 5, baths: 3, sqft: 1913, lot: "2,499 sqft lot", type: "House", days: 7, note: "", url: "https://www.zillow.com/homedetails/998-Hensley-Ave-San-Bruno-CA-94066/15496375_zpid/" },
+    { address: "698 Masson Ave", price: 1188000, beds: 3, baths: 2, sqft: 1530, lot: "2,499 sqft lot", type: "House", days: 37, note: "Price cut $61,000 on Oct 27.", url: "https://www.zillow.com/homedetails/698-Masson-Ave-San-Bruno-CA-94066/15496631_zpid/" },
+    { address: "1055 San Mateo Ave", price: 1198000, beds: 5, baths: 3, sqft: 1500, lot: "5,000 sqft lot", type: "House", days: 50, note: "Price cut $97,000 on Oct 23.", url: "https://www.zillow.com/homedetails/1055-San-Mateo-Ave-San-Bruno-CA-94066/15488972_zpid/" },
   ],
   "Milpitas": [
     { address: "1306 Mount Shasta Ave", price: 1199888, beds: 2, baths: 2, sqft: 1187, lot: "5,040 sqft lot", type: "House", days: 15, note: "The only single-family house under $1.2M in Milpitas.", url: "https://www.zillow.com/homedetails/1306-Mount-Shasta-Ave-Milpitas-CA-95035/19482966_zpid/" },
@@ -54,9 +57,10 @@ export const ZILLOW_PICKS = {
     { address: "0 Parrott Dr", price: 699000, beds: null, baths: null, sqft: null, lot: "0.92 acres", type: "Land", days: 283, note: "Residential lot, zoned R1-A. The only San Mateo lot under the cap.", url: "https://www.zillow.com/homedetails/0-Parrott-Dr-San-Mateo-CA-94402/460029256_zpid/" },
   ],
   "Redwood City": [
-    { address: "827 Chestnut St", price: 989000, beds: 2, baths: 1, sqft: 1160, lot: "5,020 sqft lot", type: "House", days: 15, note: "", url: "https://www.zillow.com/homedetails/827-Chestnut-St-Redwood-City-CA-94063/15566021_zpid/" },
-    { address: "930 Haven Ave", price: 998000, beds: 2, baths: 1, sqft: 1000, lot: "5,000 sqft lot", type: "House", days: 5, note: "", url: "https://www.zillow.com/homedetails/930-Haven-Ave-Redwood-City-CA-94063/15568572_zpid/" },
-    { address: "327 Center St", price: 898000, beds: 2, baths: 1, sqft: 800, lot: "6,098 sqft lot", type: "House", days: 2, note: "", url: "https://www.zillow.com/homedetails/327-Center-St-Redwood-City-CA-94061/15566443_zpid/" },
+    { address: "614 Warrington Ave", price: 849000, beds: 2, baths: 2, sqft: 760, lot: "2,500 sqft lot", type: "House", days: 48, note: "Price cut $40,000 on Oct 19.", url: "https://www.zillow.com/homedetails/614-Warrington-Ave-Redwood-City-CA-94063/15567265_zpid/" },
+    { address: "327 Center St", price: 898000, beds: 2, baths: 1, sqft: 800, lot: "6,098 sqft lot", type: "House", days: 7, note: "", url: "https://www.zillow.com/homedetails/327-Center-St-Redwood-City-CA-94061/15566443_zpid/" },
+    { address: "827 Chestnut St", price: 989000, beds: 2, baths: 1, sqft: 1160, lot: "5,020 sqft lot", type: "House", days: 19, note: "", url: "https://www.zillow.com/homedetails/827-Chestnut-St-Redwood-City-CA-94063/15566021_zpid/" },
+    { address: "344 E St", price: 1198000, beds: 2, baths: 2, sqft: 820, lot: "5,100 sqft lot", type: "House", days: 5, note: "", url: "https://www.zillow.com/homedetails/344-E-St-Redwood-City-CA-94063/15563541_zpid/" },
     { address: "2 Laurel Way", price: 520000, beds: null, baths: null, sqft: null, lot: "8,633 sqft", type: "Land", days: 16, note: "Emerald Lake Hills lot, marketed as build-your-dream-home.", url: "https://www.zillow.com/homedetails/2-Laurel-Way-Redwood-City-CA-94062/466189081_zpid/" },
     { address: "Undisclosed address (Lot 80), 94062", price: 545000, beds: null, baths: null, sqft: null, lot: "9,100 sqft", type: "Land", days: 16, note: "Quiet cul-de-sac lot; price cut $304,000 on Nov 7.", url: "https://www.zillow.com/homedetails/Redwood-City-CA-94062/466189082_zpid/" },
   ],
@@ -82,16 +86,20 @@ export const ZILLOW_PICKS = {
     { address: "6861 Brighton Dr", price: 1199000, beds: 3, baths: 2, sqft: 1288, lot: "6,534 sqft lot", type: "House", days: 98, note: "", url: "https://www.zillow.com/homedetails/6861-Brighton-Dr-Dublin-CA-94568/25065000_zpid/" },
   ],
   "Martinez": [
-    { address: "2295 S Crest Ave", price: 688000, beds: 3, baths: 3, sqft: 1484, lot: "8,485 sqft lot", type: "House", days: 79, note: "", url: "https://www.zillow.com/homedetails/2295-S-Crest-Ave-Martinez-CA-94553/18490561_zpid/" },
-    { address: "631 Sherree Ct", price: 1149000, beds: 3, baths: 2, sqft: 1491, lot: "10,454 sqft lot", type: "House", days: 73, note: "", url: "https://www.zillow.com/homedetails/631-Sherree-Ct-Martinez-CA-94553/18402124_zpid/" },
-    { address: "2214 Pacheco Blvd", price: 658500, beds: 3, baths: 2, sqft: 1316, lot: "3,920 sqft lot", type: "House", days: 3, note: "", url: "https://www.zillow.com/homedetails/2214-Pacheco-Blvd-Martinez-CA-94553/18490327_zpid/" },
+    { address: "2214 Pacheco Blvd", price: 658500, beds: 3, baths: 2, sqft: 1316, lot: "3,920 sqft lot", type: "House", days: 6, note: "Price cut $1,400 on Nov 6.", url: "https://www.zillow.com/homedetails/2214-Pacheco-Blvd-Martinez-CA-94553/18490327_zpid/" },
+    { address: "2295 S Crest Ave", price: 688000, beds: 3, baths: 3, sqft: 1484, lot: "8,485 sqft lot", type: "House", days: 82, note: "", url: "https://www.zillow.com/homedetails/2295-S-Crest-Ave-Martinez-CA-94553/18490561_zpid/" },
+    { address: "80 Gilrix Dr", price: 879000, beds: 3, baths: 3, sqft: 1905, lot: "0.26-acre lot", type: "House", days: 6, note: "Price cut $20,000 on Nov 6.", url: "https://www.zillow.com/homedetails/80-Gilrix-Dr-Martinez-CA-94553/18492487_zpid/" },
+    { address: "5636 Vineta Ct", price: 888000, beds: 3, baths: 2, sqft: 1570, lot: "6,969 sqft lot", type: "House", days: 7, note: "", url: "https://www.zillow.com/homedetails/5636-Vineta-Ct-Martinez-CA-94553/18487999_zpid/" },
+    { address: "4209 Alhambra Way", price: 975000, beds: 4, baths: 3, sqft: 2259, lot: "10,454 sqft lot", type: "House", days: 28, note: "", url: "https://www.zillow.com/homedetails/4209-Alhambra-Way-Martinez-CA-94553/18492442_zpid/" },
     { address: "0 Palm Ave", price: 275000, beds: null, baths: null, sqft: null, lot: "2.66 acres", type: "Land", days: 8, note: "", url: "https://www.zillow.com/homedetails/0-Palm-Ave-Martinez-CA-94553/446403003_zpid/" },
     { address: "Warren St", price: 100000, beds: null, baths: null, sqft: null, lot: "7,873 sqft", type: "Land", days: 89, note: "", url: "https://www.zillow.com/homedetails/Warren-St-Martinez-CA-94553/249602261_zpid/" },
   ],
   "Petaluma": [
-    { address: "2032 Easton Dr", price: 678000, beds: 3, baths: 3, sqft: 1232, lot: "1,838 sqft lot", type: "House", days: 93, note: "", url: "https://www.zillow.com/homedetails/2032-Easton-Dr-Petaluma-CA-94952/54787487_zpid/" },
-    { address: "128 Burlington Dr", price: 635000, beds: 3, baths: 2, sqft: 1400, lot: "6,298 sqft lot", type: "House", days: 45, note: "", url: "https://www.zillow.com/homedetails/128-Burlington-Dr-Petaluma-CA-94952/15752344_zpid/" },
-    { address: "8 Cochrane Way", price: 1195000, beds: 3, baths: 2, sqft: 1811, lot: "7,300 sqft lot", type: "House", days: 72, note: "", url: "https://www.zillow.com/homedetails/8-Cochrane-Way-Petaluma-CA-94952/15755679_zpid/" },
+    { address: "128 Burlington Dr", price: 635000, beds: 3, baths: 2, sqft: 1400, lot: "6,298 sqft lot", type: "House", days: 48, note: "Price cut $15,000 on Oct 26.", url: "https://www.zillow.com/homedetails/128-Burlington-Dr-Petaluma-CA-94952/15752344_zpid/" },
+    { address: "2032 Easton Dr", price: 678000, beds: 3, baths: 3, sqft: 1232, lot: "1,838 sqft lot", type: "House", days: 96, note: "Price cut $21,000 on Oct 15.", url: "https://www.zillow.com/homedetails/2032-Easton-Dr-Petaluma-CA-94952/54787487_zpid/" },
+    { address: "901 Catalpa Way", price: 839000, beds: 4, baths: 3, sqft: 1924, lot: "7,801 sqft lot", type: "House", days: 104, note: "Price cut $21,000 on Sep 24.", url: "https://www.zillow.com/homedetails/901-Catalpa-Way-Petaluma-CA-94954/15748817_zpid/" },
+    { address: "204 Sutter St", price: 850000, beds: 4, baths: 2, sqft: 1560, lot: "6,298 sqft lot", type: "House", days: 62, note: "", url: "https://www.zillow.com/homedetails/204-Sutter-St-Petaluma-CA-94954/15846759_zpid/" },
+    { address: "1854 Heather Ln", price: 875000, beds: 3, baths: 2, sqft: 1508, lot: "5,728 sqft lot", type: "House", days: 9, note: "", url: "https://www.zillow.com/homedetails/1854-Heather-Ln-Petaluma-CA-94954/15836076_zpid/" },
     { address: "1170 I St", price: 500000, beds: null, baths: null, sqft: null, lot: "0.56 acres", type: "Land", days: 18, note: "", url: "https://www.zillow.com/homedetails/1170-I-St-Petaluma-CA-94952/96058853_zpid/" },
     { address: "4663 Hillsborough Dr", price: 775000, beds: null, baths: null, sqft: null, lot: "15.34 acres", type: "Land", days: 52, note: "", url: "https://www.zillow.com/homedetails/4663-Hillsborough-Dr-Petaluma-CA-94954/300264816_zpid/" },
   ],
@@ -111,7 +119,9 @@ export const PICKS_NOTE =
   "that evening. Hercules, Dublin, Martinez and Petaluma picks were added " +
   "the same way on Nov 9. Newark, Castro Valley, San Mateo and Fremont " +
   "picks were refreshed the same way on Nov 10. Walnut Creek, San Jose, " +
-  "Dublin and Hercules picks were refreshed the same way on Nov 11. Listings change fast, so each address links straight to " +
+  "Dublin and Hercules picks were refreshed the same way on Nov 11. San " +
+  "Bruno, Redwood City, Martinez and Petaluma picks were refreshed the " +
+  "same way on Nov 12. Listings change fast, so each address links straight to " +
   "the live Zillow listing. Each home also carries its own Home score: " +
   "50% the score of the tract the home actually sits in, 50% the home " +
   "itself (price vs the tract's typical value, fit, and freshness). " +
