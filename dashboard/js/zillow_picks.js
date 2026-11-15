@@ -45,7 +45,7 @@ export const ZILLOW_PICKS = {
     { address: "2440 Poplar Dr", price: 1079950, beds: 4, baths: 2, sqft: 1516, lot: "5,500 sqft lot", type: "House", days: 112, note: "", url: "https://www.zillow.com/homedetails/2440-Poplar-Dr-San-Jose-CA-95122/19727282_zpid/" },
     { address: "2869 Corda Dr", price: 1199000, beds: 4, baths: 3, sqft: 1593, lot: "3,280 sqft lot", type: "House", days: 38, note: "", url: "https://www.zillow.com/homedetails/2869-Corda-Dr-San-Jose-CA-95122/19802503_zpid/" },
     { address: "252 Ketchum Dr", price: 1150000, beds: 4, baths: 2, sqft: 1568, lot: "6,534 sqft lot", type: "House", days: 62, note: "", url: "https://www.zillow.com/homedetails/252-Ketchum-Dr-San-Jose-CA-95127/19722318_zpid/" },
-    { address: "376 Hull Ave", price: 1150000, beds: 3, baths: 2, sqft: 1484, lot: "6,072 sqft lot", type: "House", days: 0, note: "Willow Glen; listed Nov 14.", url: "https://www.zillow.com/homedetails/376-Hull-Ave-San-Jose-CA-95125/19578072_zpid/" },
+    { address: "376 Hull Ave", price: 1150000, beds: 3, baths: 2, sqft: 1484, lot: "6,072 sqft lot", type: "House", days: 1, note: "Willow Glen; listed Nov 14.", url: "https://www.zillow.com/homedetails/376-Hull-Ave-San-Jose-CA-95125/19578072_zpid/" },
     { address: "819 Boulder Dr", price: 288000, beds: null, baths: null, sqft: null, lot: "0.47 acres", type: "Land", days: 2, note: "Level residential lot, zoned R1B1, public sewer.", url: "https://www.zillow.com/homedetails/819-Boulder-Dr-San-Jose-CA-95132/153466762_zpid/" },
     { address: "915 E Julian St", price: 550000, beds: null, baths: null, sqft: null, lot: "4,356 sqft", type: "Land", days: 44, note: "Downtown infill lot; price cut $50,000 on Oct 8. Photos show a small existing florist building on the lot.", url: "https://www.zillow.com/homedetails/915-E-Julian-St-San-Jose-CA-95112/448917472_zpid/" },
   ],
@@ -72,7 +72,7 @@ export const ZILLOW_PICKS = {
     { address: "Undisclosed address (Lot 80), 94062", price: 545000, beds: null, baths: null, sqft: null, lot: "9,100 sqft", type: "Land", days: 16, note: "Quiet cul-de-sac lot; price cut $304,000 on Nov 7.", url: "https://www.zillow.com/homedetails/Redwood-City-CA-94062/466189082_zpid/" },
   ],
   "Castro Valley": [
-    { address: "2375 Vegas Ave", price: 828000, beds: 3, baths: 1, sqft: 1031, lot: "5,865 sqft lot", type: "House", days: 0, note: "Listed today.", url: "https://www.zillow.com/homedetails/2375-Vegas-Ave-Castro-Valley-CA-94546/24963451_zpid/" },
+    { address: "2375 Vegas Ave", price: 828000, beds: 3, baths: 1, sqft: 1031, lot: "5,865 sqft lot", type: "House", days: 1, note: "Listed Nov 14.", url: "https://www.zillow.com/homedetails/2375-Vegas-Ave-Castro-Valley-CA-94546/24963451_zpid/" },
     { address: "18662 Stanton Ave", price: 899000, beds: 3, baths: 2, sqft: 1014, lot: "7,503 sqft lot", type: "House", days: 2, note: "Listed Nov 12.", url: "https://www.zillow.com/homedetails/18662-Stanton-Ave-Castro-Valley-CA-94546/24906144_zpid/" },
     { address: "3443 Middleton Ave", price: 879000, beds: 3, baths: 1, sqft: 1106, lot: "6,250 sqft lot", type: "House", days: 3, note: "", url: "https://www.zillow.com/homedetails/3443-Middleton-Ave-Castro-Valley-CA-94546/24911906_zpid/" },
     { address: "4848 Mancini Dr", price: 975000, beds: 3, baths: 2, sqft: 1311, lot: "5,762 sqft lot", type: "House", days: 7, note: "", url: "https://www.zillow.com/homedetails/4848-Mancini-Dr-Castro-Valley-CA-94546/24909933_zpid/" },
@@ -113,7 +113,7 @@ export const ZILLOW_PICKS = {
     { address: "4663 Hillsborough Dr", price: 775000, beds: null, baths: null, sqft: null, lot: "15.34 acres", type: "Land", days: 52, note: "", url: "https://www.zillow.com/homedetails/4663-Hillsborough-Dr-Petaluma-CA-94954/300264816_zpid/" },
   ],
   "Newark": [
-    { address: "8220 Juniper Ave", price: 998000, beds: 3, baths: 2, sqft: 1080, lot: "6,359 sqft lot", type: "House", days: 0, note: "Newest listing; open house Nov 14-15.", url: "https://www.zillow.com/homedetails/8220-Juniper-Ave-Newark-CA-94560/24921666_zpid/" },
+    { address: "8220 Juniper Ave", price: 998000, beds: 3, baths: 2, sqft: 1080, lot: "6,359 sqft lot", type: "House", days: 2, note: "Newest listing; open house Nov 14-15.", url: "https://www.zillow.com/homedetails/8220-Juniper-Ave-Newark-CA-94560/24921666_zpid/" },
     { address: "6649 Mayhews Landing Rd", price: 1158000, beds: 2, baths: 2, sqft: 1167, lot: "8,712 sqft lot", type: "House", days: 4, note: "", url: "https://www.zillow.com/homedetails/6649-Mayhews-Landing-Rd-Newark-CA-94560/24923680_zpid/" },
     { address: "7880 Hazelnut Dr", price: 1169999, beds: 3, baths: 2, sqft: 1346, lot: "6,386 sqft lot", type: "House", days: 9, note: "Price cut $30,001 on Nov 5.", url: "https://www.zillow.com/homedetails/7880-Hazelnut-Dr-Newark-CA-94560/24922729_zpid/" },
     { address: "6435 Normandy Dr", price: 1099000, beds: 4, baths: 3, sqft: 2031, lot: "6,100 sqft lot", type: "House", days: 10, note: "Relisted Nov 3 at $1,099,000, down from $1,198,000 in May.", url: "https://www.zillow.com/homedetails/6435-Normandy-Dr-Newark-CA-94560/24924479_zpid/" },
