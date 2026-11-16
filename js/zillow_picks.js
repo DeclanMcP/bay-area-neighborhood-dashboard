@@ -13,6 +13,9 @@
 // San Jose, Dublin and Hercules picks were refreshed the same way on
 // 2026-11-14 (morning PT). San Bruno, Redwood City, Martinez and
 // Petaluma picks were refreshed the same way on 2026-11-15 (morning PT).
+// Fremont, Castro Valley, San Mateo and Newark picks were refreshed the
+// same way on 2026-11-16 (morning PT); 42650 Isle Royal St, Fremont
+// went pending and was dropped.
 // Prices and availability
 // change; every address links to the live listing so it can be re-checked
 // in one click. Refresh by re-running the same Zillow searches, not from
@@ -50,15 +53,17 @@ export const ZILLOW_PICKS = {
     { address: "915 E Julian St", price: 550000, beds: null, baths: null, sqft: null, lot: "4,356 sqft", type: "Land", days: 44, note: "Downtown infill lot; price cut $50,000 on Oct 8. Photos show a small existing florist building on the lot.", url: "https://www.zillow.com/homedetails/915-E-Julian-St-San-Jose-CA-95112/448917472_zpid/" },
   ],
   "Fremont": [
-    { address: "36846 Niles Blvd", price: 1050000, beds: 3, baths: 2, sqft: 1700, lot: "5,350 sqft lot", type: "House", days: 20, note: "Fixer-upper opportunity.", url: "https://www.zillow.com/homedetails/36846-Niles-Blvd-Fremont-CA-94536/25016491_zpid/" },
-    { address: "42650 Isle Royal St", price: 1100000, beds: 3, baths: 2, sqft: 1581, lot: "5,700 sqft lot", type: "House", days: 14, note: "Patio area and additional family room.", url: "https://www.zillow.com/homedetails/42650-Isle-Royal-St-Fremont-CA-94538/25040188_zpid/" },
-    { address: "33866 Gannet Ter", price: 1020000, beds: 2, baths: 3, sqft: 1407, lot: "2,700 sqft lot", type: "House", days: 97, note: "Price cut $50,000 on Nov 5; $260/mo HOA.", url: "https://www.zillow.com/homedetails/33866-Gannet-Ter-Fremont-CA-94555/25056996_zpid/" },
+    { address: "36846 Niles Blvd", price: 1050000, beds: 3, baths: 2, sqft: 1700, lot: "5,350 sqft lot", type: "House", days: 26, note: "Fixer-upper opportunity.", url: "https://www.zillow.com/homedetails/36846-Niles-Blvd-Fremont-CA-94536/25016491_zpid/" },
+    { address: "33866 Gannet Ter", price: 1020000, beds: 2, baths: 3, sqft: 1407, lot: "2,700 sqft lot", type: "House", days: 103, note: "Price cut $50,000 on Nov 5; $260/mo HOA.", url: "https://www.zillow.com/homedetails/33866-Gannet-Ter-Fremont-CA-94555/25056996_zpid/" },
+    { address: "37062 Dutra Way", price: 850000, beds: 3, baths: 1, sqft: 1050, lot: "5,429 sqft lot", type: "House", days: 19, note: "Listed Nov 16.", url: "https://www.zillow.com/homedetails/37062-Dutra-Way-Fremont-CA-94536/25006001_zpid/" },
+    { address: "37275 Dondero Way", price: 999888, beds: 3, baths: 2, sqft: 1143, lot: "5,429 sqft lot", type: "House", days: 38, note: "Listed Nov 16.", url: "https://www.zillow.com/homedetails/37275-Dondero-Way-Fremont-CA-94536/25006016_zpid/" },
+    { address: "3864 Jamestown Rd", price: 1198000, beds: 3, baths: 2, sqft: 1112, lot: "5,310 sqft lot", type: "House", days: 33, note: "Listed Nov 16.", url: "https://www.zillow.com/homedetails/3864-Jamestown-Rd-Fremont-CA-94538/25041104_zpid/" },
     { address: "3279 Washington Blvd", price: 1199000, beds: null, baths: null, sqft: null, lot: "8,572 sqft", type: "Land", days: 164, note: "Level lot in Mission San Jose; cut from $1,300,000 in June.", url: "https://www.zillow.com/homedetails/3279-Washington-Blvd-Fremont-CA-94539/299072505_zpid/" },
     { address: "Undisclosed address, 94538", price: 199999, beds: null, baths: null, sqft: null, lot: "3,000 sqft", type: "Land", days: 58, note: "Undeveloped raw land, surveyed.", url: "https://www.zillow.com/homedetails/Fremont-CA-94538/444776316_zpid/" },
   ],
   "San Mateo": [
-    { address: "221 N Delaware St", price: 1198000, beds: 3, baths: 2, sqft: 1070, lot: "6,038 sqft lot", type: "House", days: 28, note: "Extra-deep lot with two units; built 1907.", url: "https://www.zillow.com/homedetails/221-N-Delaware-St-San-Mateo-CA-94401/15522187_zpid/" },
-    { address: "3419 La Selva St", price: 998000, beds: 2, baths: 2, sqft: 1190, lot: "1,612 sqft lot", type: "House", days: 48, note: "Listing page shows a $555/mo HOA; attached unit, townhouse-like.", url: "https://www.zillow.com/homedetails/3419-La-Selva-St-San-Mateo-CA-94403/15541037_zpid/" },
+    { address: "221 N Delaware St", price: 1198000, beds: 3, baths: 2, sqft: 1070, lot: "6,038 sqft lot", type: "House", days: 31, note: "Extra-deep lot with two units; built 1907.", url: "https://www.zillow.com/homedetails/221-N-Delaware-St-San-Mateo-CA-94401/15522187_zpid/" },
+    { address: "3419 La Selva St", price: 998000, beds: 2, baths: 2, sqft: 1190, lot: "1,612 sqft lot", type: "House", days: 51, note: "Listing page shows a $555/mo HOA; attached unit, townhouse-like.", url: "https://www.zillow.com/homedetails/3419-La-Selva-St-San-Mateo-CA-94403/15541037_zpid/" },
     { address: "927 Shoreline Dr", price: 1150000, beds: 3, baths: 2, sqft: 1570, lot: "", type: "Condo", days: 23, note: "Price cut $48,000 on Nov 4.", url: "https://www.zillow.com/homedetails/927-Shoreline-Dr-San-Mateo-CA-94404/15630107_zpid/" },
     { address: "0 Parrott Dr", price: 699000, beds: null, baths: null, sqft: null, lot: "0.92 acres", type: "Land", days: 283, note: "Residential lot, zoned R1-A. The only San Mateo lot under the cap.", url: "https://www.zillow.com/homedetails/0-Parrott-Dr-San-Mateo-CA-94402/460029256_zpid/" },
   ],
@@ -73,11 +78,11 @@ export const ZILLOW_PICKS = {
     { address: "Undisclosed address (Lot 80), 94062", price: 545000, beds: null, baths: null, sqft: null, lot: "9,100 sqft", type: "Land", days: 16, note: "Quiet cul-de-sac lot; price cut $304,000 on Nov 7.", url: "https://www.zillow.com/homedetails/Redwood-City-CA-94062/466189082_zpid/" },
   ],
   "Castro Valley": [
-    { address: "2375 Vegas Ave", price: 828000, beds: 3, baths: 1, sqft: 1031, lot: "5,865 sqft lot", type: "House", days: 1, note: "Listed Nov 14.", url: "https://www.zillow.com/homedetails/2375-Vegas-Ave-Castro-Valley-CA-94546/24963451_zpid/" },
-    { address: "18662 Stanton Ave", price: 899000, beds: 3, baths: 2, sqft: 1014, lot: "7,503 sqft lot", type: "House", days: 2, note: "Listed Nov 12.", url: "https://www.zillow.com/homedetails/18662-Stanton-Ave-Castro-Valley-CA-94546/24906144_zpid/" },
-    { address: "3443 Middleton Ave", price: 879000, beds: 3, baths: 1, sqft: 1106, lot: "6,250 sqft lot", type: "House", days: 3, note: "", url: "https://www.zillow.com/homedetails/3443-Middleton-Ave-Castro-Valley-CA-94546/24911906_zpid/" },
-    { address: "4848 Mancini Dr", price: 975000, beds: 3, baths: 2, sqft: 1311, lot: "5,762 sqft lot", type: "House", days: 7, note: "", url: "https://www.zillow.com/homedetails/4848-Mancini-Dr-Castro-Valley-CA-94546/24909933_zpid/" },
-    { address: "3466 Arcadian Dr", price: 1198000, beds: 3, baths: 3, sqft: 1823, lot: "6,969 sqft lot", type: "House", days: 7, note: "New listing.", url: "https://www.zillow.com/homedetails/3466-Arcadian-Dr-Castro-Valley-CA-94546/24911459_zpid/" },
+    { address: "2375 Vegas Ave", price: 828000, beds: 3, baths: 1, sqft: 1031, lot: "5,865 sqft lot", type: "House", days: 3, note: "Listed Nov 14.", url: "https://www.zillow.com/homedetails/2375-Vegas-Ave-Castro-Valley-CA-94546/24963451_zpid/" },
+    { address: "18662 Stanton Ave", price: 899000, beds: 3, baths: 2, sqft: 1014, lot: "7,503 sqft lot", type: "House", days: 5, note: "Listed Nov 12.", url: "https://www.zillow.com/homedetails/18662-Stanton-Ave-Castro-Valley-CA-94546/24906144_zpid/" },
+    { address: "3443 Middleton Ave", price: 879000, beds: 3, baths: 1, sqft: 1106, lot: "6,250 sqft lot", type: "House", days: 6, note: "", url: "https://www.zillow.com/homedetails/3443-Middleton-Ave-Castro-Valley-CA-94546/24911906_zpid/" },
+    { address: "4848 Mancini Dr", price: 975000, beds: 3, baths: 2, sqft: 1311, lot: "5,762 sqft lot", type: "House", days: 10, note: "", url: "https://www.zillow.com/homedetails/4848-Mancini-Dr-Castro-Valley-CA-94546/24909933_zpid/" },
+    { address: "20114 Normandy Ct", price: 850000, beds: 2, baths: 2, sqft: 1194, lot: "4,680 sqft lot", type: "House", days: null, note: "Listed Nov 16; days on Zillow not shown.", url: "https://www.zillow.com/homedetails/20114-Normandy-Ct-Castro-Valley-CA-94546/24908121_zpid/" },
     { address: "6733 Sunnyslope Ave", price: 425000, beds: null, baths: null, sqft: null, lot: "0.49 acres", type: "Land", days: 86, note: "Fenced, sloped lot in the Sunnyslope Village subdivision.", url: "https://www.zillow.com/homedetails/6733-Sunnyslope-Ave-Castro-Valley-CA-94552/299077212_zpid/" },
     { address: "21479 Eden Canyon Rd", price: 699800, beds: null, baths: null, sqft: null, lot: "9.81 acres", type: "Land", days: 65, note: "Large canyon parcel with panoramic views.", url: "https://www.zillow.com/homedetails/21479-Eden-Canyon-Rd-Castro-Valley-CA-94552/440132289_zpid/" },
   ],
@@ -114,11 +119,11 @@ export const ZILLOW_PICKS = {
     { address: "4663 Hillsborough Dr", price: 775000, beds: null, baths: null, sqft: null, lot: "15.34 acres", type: "Land", days: 52, note: "", url: "https://www.zillow.com/homedetails/4663-Hillsborough-Dr-Petaluma-CA-94954/300264816_zpid/" },
   ],
   "Newark": [
-    { address: "8220 Juniper Ave", price: 998000, beds: 3, baths: 2, sqft: 1080, lot: "6,359 sqft lot", type: "House", days: 2, note: "Newest listing; open house Nov 14-15.", url: "https://www.zillow.com/homedetails/8220-Juniper-Ave-Newark-CA-94560/24921666_zpid/" },
-    { address: "6649 Mayhews Landing Rd", price: 1158000, beds: 2, baths: 2, sqft: 1167, lot: "8,712 sqft lot", type: "House", days: 4, note: "", url: "https://www.zillow.com/homedetails/6649-Mayhews-Landing-Rd-Newark-CA-94560/24923680_zpid/" },
-    { address: "7880 Hazelnut Dr", price: 1169999, beds: 3, baths: 2, sqft: 1346, lot: "6,386 sqft lot", type: "House", days: 9, note: "Price cut $30,001 on Nov 5.", url: "https://www.zillow.com/homedetails/7880-Hazelnut-Dr-Newark-CA-94560/24922729_zpid/" },
-    { address: "6435 Normandy Dr", price: 1099000, beds: 4, baths: 3, sqft: 2031, lot: "6,100 sqft lot", type: "House", days: 10, note: "Relisted Nov 3 at $1,099,000, down from $1,198,000 in May.", url: "https://www.zillow.com/homedetails/6435-Normandy-Dr-Newark-CA-94560/24924479_zpid/" },
-    { address: "36173 Cedar Blvd", price: 999000, beds: 3, baths: 2, sqft: 1464, lot: "6,000 sqft lot", type: "House", days: 52, note: "Price cut $150,000 on Oct 16.", url: "https://www.zillow.com/homedetails/36173-Cedar-Blvd-Newark-CA-94560/24926200_zpid/" },
+    { address: "8220 Juniper Ave", price: 998000, beds: 3, baths: 2, sqft: 1080, lot: "6,359 sqft lot", type: "House", days: null, note: "Days on Zillow not shown on Nov 16 check; still active.", url: "https://www.zillow.com/homedetails/8220-Juniper-Ave-Newark-CA-94560/24921666_zpid/" },
+    { address: "6649 Mayhews Landing Rd", price: 1158000, beds: 2, baths: 2, sqft: 1167, lot: "8,712 sqft lot", type: "House", days: 7, note: "", url: "https://www.zillow.com/homedetails/6649-Mayhews-Landing-Rd-Newark-CA-94560/24923680_zpid/" },
+    { address: "7880 Hazelnut Dr", price: 1169999, beds: 3, baths: 2, sqft: 1346, lot: "6,386 sqft lot", type: "House", days: 12, note: "Price cut $30,001 on Nov 5.", url: "https://www.zillow.com/homedetails/7880-Hazelnut-Dr-Newark-CA-94560/24922729_zpid/" },
+    { address: "6435 Normandy Dr", price: 1099000, beds: 4, baths: 3, sqft: 2031, lot: "6,100 sqft lot", type: "House", days: 13, note: "Relisted Nov 3 at $1,099,000, down from $1,198,000 in May.", url: "https://www.zillow.com/homedetails/6435-Normandy-Dr-Newark-CA-94560/24924479_zpid/" },
+    { address: "35564 Biscay Pl", price: 1199000, beds: 4, baths: 2, sqft: 1450, lot: "7,392 sqft lot", type: "House", days: 28, note: "Listed Nov 16.", url: "https://www.zillow.com/homedetails/35564-Biscay-Pl-Newark-CA-94560/24924214_zpid/" },
   ],
 };
 
@@ -137,7 +142,8 @@ export const PICKS_NOTE =
   "picks were refreshed the same way on Nov 13. Walnut Creek, San Jose, " +
   "Dublin and Hercules picks were refreshed the same way on Nov 14. San " +
   "Bruno, Redwood City, Martinez and Petaluma picks were refreshed the " +
-  "same way on Nov 15. Listings change fast, so each address links straight to " +
+  "same way on Nov 15. Fremont, Castro Valley, San Mateo and Newark " +
+  "picks were refreshed the same way on Nov 16. Listings change fast, so each address links straight to " +
   "the live Zillow listing. Each home also carries its own Home score: " +
   "50% the score of the tract the home actually sits in, 50% the home " +
   "itself (price vs the tract's typical value, fit, and freshness). " +
