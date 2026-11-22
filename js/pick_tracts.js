@@ -1,5 +1,5 @@
 // Census tract for each Zillow pick, keyed by ZPID, from the Census
-// Geocoder (scripts/geocode_picks.mjs, 2026-11-21).
+// Geocoder (scripts/geocode_picks.mjs, 2026-11-22).
 // The listing scorer uses this to give each home its own tract's score.
 export const PICK_TRACTS = {
   "15488972": "06081604200",
@@ -8,6 +8,8 @@ export const PICK_TRACTS = {
   "15498805": "06081603900",
   "15500964": "06081604103",
   "15522187": "06081606201",
+  "15524497": "06081606100",
+  "15524663": "06081607701",
   "15532065": "06081608400",
   "15541037": "06081608400",
   "15564551": "06081610202",
