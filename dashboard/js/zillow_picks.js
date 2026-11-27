@@ -191,6 +191,29 @@
 // 18th St, 1759 Scott St, 2479 Ocala Ave, 230 S 10th St, 1248 S 2nd St
 // and 0 Cinnabar Hills Rd, San Jose. 1031 Delmas Ave, San Jose stays on
 // file as the 5th house there (74.2, just behind 1036 Ramona Ave).
+// Redwood City, San Jose, Fremont and San Mateo picks were refreshed
+// the same way on 2026-11-27 (morning PT); nothing on file went pending
+// or off market and no on-file price changed. New: 528 Alden St, Redwood
+// City; 1376 Suffolk Dr, 3802 Cas Dr, 160 Pierce Ave, 1782 Kammerer Ave,
+// 4591 Thornhaven Way, 4635 Mia Cir, 5069 Pharlap Ave, 1771 Ocala Ave,
+// 2553 Suisun Ave, 782 N 15th St, 909 Vine St, 523 Madera Ave, 4078 San
+// Ramon Way, 338 S 19th St, 417 Vaughn Ave and 3326 Pepper Tree Ln, San
+// Jose; 4928 Cody Ct and 32993 Lake Bluestone St, Fremont. 1376 Suffolk
+// Dr was listed Nov 26 and 4928 Cody Ct was listed Nov 26, both after the
+// Nov 26 run. 417 Vaughn Ave was listed Oct 23 at $1,190,000, removed Nov
+// 7, relisted Nov 12 at $990,000. 294 Grau Dr, Fremont is still coming
+// soon; 3415 La Selva St, San Mateo is still a foreclosure; 3216 Bluebird
+// Dr, San Jose stays out (teaser listing: sold Nov 2025 for $2,015,000).
+// Picks keep at most 5 houses per place by Home score; San Jose has 114
+// houses under the cap in total, Redwood City 6, Fremont 15 in the
+// verified main list, San Mateo 5, so the file holds only the top 5 by
+// Home score.
+// Dropped from the file (still for sale, below the top 5): 4928 Cody Ct
+// and 32993 Lake Bluestone St, Fremont; 1782 Kammerer Ave, 2553 Suisun
+// Ave, 1376 Suffolk Dr, 4078 San Ramon Way, 1771 Ocala Ave, 3802 Cas Dr,
+// 417 Vaughn Ave, 160 Pierce Ave, 4635 Mia Cir, 338 S 19th St, 3326
+// Pepper Tree Ln, 523 Madera Ave, 4591 Thornhaven Way, 5069 Pharlap Ave,
+// 782 N 15th St and 909 Vine St, San Jose; 528 Alden St, Redwood City.
 // Prices and availability
 // change; every address links to the live listing so it can be re-checked
 // in one click. Refresh by re-running the same Zillow searches, not from
@@ -217,36 +240,36 @@ export const ZILLOW_PICKS = {
     { address: "180 Marylinn Dr", price: 995000, beds: 4, baths: 2, sqft: 1505, lot: "", type: "Condo", days: 4, note: "", url: "https://www.zillow.com/homedetails/180-Marylinn-Dr-Milpitas-CA-95035/19472199_zpid/" },
   ],
   "San Jose": [
-    { address: "376 Hull Ave", price: 1150000, beds: 3, baths: 2, sqft: 1484, lot: "6,072 sqft lot", type: "House", days: 12, note: "Willow Glen; listed Nov 14.", url: "https://www.zillow.com/homedetails/376-Hull-Ave-San-Jose-CA-95125/19578072_zpid/" },
-    { address: "422 Atlanta Ave", price: 999000, beds: 3, baths: 1, sqft: 1056, lot: "5,201 sqft lot", type: "House", days: 7, note: "Listed Nov 19.", url: "https://www.zillow.com/homedetails/422-Atlanta-Ave-San-Jose-CA-95125/19577921_zpid/" },
-    { address: "1036 Ramona Ave", price: 999888, beds: 2, baths: 1, sqft: 1140, lot: "6,300 sqft lot", type: "House", days: 6, note: "Listed Nov 19; now for sale (was a Zillow Preview).", url: "https://www.zillow.com/homedetails/1036-Ramona-Ave-San-Jose-CA-95125/19578532_zpid/" },
-    { address: "3762 Brigadoon Way", price: 1000000, beds: 3, baths: 2, sqft: 1152, lot: "6,600 sqft lot", type: "House", days: 5, note: "Listed Nov 21.", url: "https://www.zillow.com/homedetails/3762-Brigadoon-Way-San-Jose-CA-95121/19806616_zpid/" },
-    { address: "1031 Delmas Ave", price: 1199000, beds: 3, baths: 2, sqft: 1064, lot: "5,400 sqft lot", type: "House", days: 13, note: "Willow Glen.", url: "https://www.zillow.com/homedetails/1031-Delmas-Ave-San-Jose-CA-95125/19578238_zpid/" },
+    { address: "376 Hull Ave", price: 1150000, beds: 3, baths: 2, sqft: 1484, lot: "6,072 sqft lot", type: "House", days: 13, note: "Willow Glen; listed Nov 14.", url: "https://www.zillow.com/homedetails/376-Hull-Ave-San-Jose-CA-95125/19578072_zpid/" },
+    { address: "422 Atlanta Ave", price: 999000, beds: 3, baths: 1, sqft: 1056, lot: "5,201 sqft lot", type: "House", days: 8, note: "Listed Nov 19.", url: "https://www.zillow.com/homedetails/422-Atlanta-Ave-San-Jose-CA-95125/19577921_zpid/" },
+    { address: "1036 Ramona Ave", price: 999888, beds: 2, baths: 1, sqft: 1140, lot: "6,300 sqft lot", type: "House", days: 7, note: "Listed Nov 19; now for sale (was a Zillow Preview).", url: "https://www.zillow.com/homedetails/1036-Ramona-Ave-San-Jose-CA-95125/19578532_zpid/" },
+    { address: "3762 Brigadoon Way", price: 1000000, beds: 3, baths: 2, sqft: 1152, lot: "6,600 sqft lot", type: "House", days: 6, note: "Listed Nov 21.", url: "https://www.zillow.com/homedetails/3762-Brigadoon-Way-San-Jose-CA-95121/19806616_zpid/" },
+    { address: "1031 Delmas Ave", price: 1199000, beds: 3, baths: 2, sqft: 1064, lot: "5,400 sqft lot", type: "House", days: 14, note: "Willow Glen.", url: "https://www.zillow.com/homedetails/1031-Delmas-Ave-San-Jose-CA-95125/19578238_zpid/" },
     { address: "819 Boulder Dr", price: 288000, beds: null, baths: null, sqft: null, lot: "0.47 acres", type: "Land", days: 2, note: "Level residential lot, zoned R1B1, public sewer.", url: "https://www.zillow.com/homedetails/819-Boulder-Dr-San-Jose-CA-95132/153466762_zpid/" },
     { address: "915 E Julian St", price: 550000, beds: null, baths: null, sqft: null, lot: "4,356 sqft", type: "Land", days: 44, note: "Downtown infill lot; price cut $50,000 on Oct 8. Photos show a small existing florist building on the lot.", url: "https://www.zillow.com/homedetails/915-E-Julian-St-San-Jose-CA-95112/448917472_zpid/" },
   ],
   "Fremont": [
-    { address: "36846 Niles Blvd", price: 1050000, beds: 3, baths: 2, sqft: 1700, lot: "5,350 sqft lot", type: "House", days: 36, note: "Fixer-upper opportunity; pending twice, relisted Nov 7.", url: "https://www.zillow.com/homedetails/36846-Niles-Blvd-Fremont-CA-94536/25016491_zpid/" },
-    { address: "40468 Blanchard St", price: 1050000, beds: 4, baths: 2, sqft: 1298, lot: "5,300 sqft lot", type: "House", days: 13, note: "Listed Nov 13.", url: "https://www.zillow.com/homedetails/40468-Blanchard-St-Fremont-CA-94538/25038032_zpid/" },
-    { address: "4411 Millard Ave", price: 975000, beds: 3, baths: 1, sqft: 950, lot: "5,166 sqft lot", type: "House", days: 14, note: "Listed Nov 13.", url: "https://www.zillow.com/homedetails/4411-Millard-Ave-Fremont-CA-94538/25036751_zpid/" },
-    { address: "4744 Granado Ave", price: 999000, beds: 3, baths: 2, sqft: 1168, lot: "5,662 sqft lot", type: "House", days: 7, note: "Listed Nov 19.", url: "https://www.zillow.com/homedetails/4744-Granado-Ave-Fremont-CA-94536/25005211_zpid/" },
-    { address: "37062 Dutra Way", price: 825000, beds: 3, baths: 1, sqft: 1050, lot: "5,429 sqft lot", type: "House", days: 30, note: "Price cut $25,000 on Nov 24.", url: "https://www.zillow.com/homedetails/37062-Dutra-Way-Fremont-CA-94536/25006001_zpid/" },
+    { address: "36846 Niles Blvd", price: 1050000, beds: 3, baths: 2, sqft: 1700, lot: "5,350 sqft lot", type: "House", days: 37, note: "Fixer-upper opportunity; pending twice, relisted Nov 7.", url: "https://www.zillow.com/homedetails/36846-Niles-Blvd-Fremont-CA-94536/25016491_zpid/" },
+    { address: "40468 Blanchard St", price: 1050000, beds: 4, baths: 2, sqft: 1298, lot: "5,300 sqft lot", type: "House", days: 14, note: "Listed Nov 13.", url: "https://www.zillow.com/homedetails/40468-Blanchard-St-Fremont-CA-94538/25038032_zpid/" },
+    { address: "4411 Millard Ave", price: 975000, beds: 3, baths: 1, sqft: 950, lot: "5,166 sqft lot", type: "House", days: 15, note: "Listed Nov 13.", url: "https://www.zillow.com/homedetails/4411-Millard-Ave-Fremont-CA-94538/25036751_zpid/" },
+    { address: "4744 Granado Ave", price: 999000, beds: 3, baths: 2, sqft: 1168, lot: "5,662 sqft lot", type: "House", days: 8, note: "Listed Nov 19.", url: "https://www.zillow.com/homedetails/4744-Granado-Ave-Fremont-CA-94536/25005211_zpid/" },
+    { address: "37062 Dutra Way", price: 825000, beds: 3, baths: 1, sqft: 1050, lot: "5,429 sqft lot", type: "House", days: 31, note: "Price cut $25,000 on Nov 24.", url: "https://www.zillow.com/homedetails/37062-Dutra-Way-Fremont-CA-94536/25006001_zpid/" },
     { address: "Undisclosed address, 94538", price: 199999, beds: null, baths: null, sqft: null, lot: "3,000 sqft", type: "Land", days: 58, note: "Undeveloped raw land, surveyed.", url: "https://www.zillow.com/homedetails/Fremont-CA-94538/444776316_zpid/" },
   ],
   "San Mateo": [
-    { address: "221 N Delaware St", price: 1198000, beds: 3, baths: 2, sqft: 1070, lot: "6,038 sqft lot", type: "House", days: 41, note: "Extra-deep lot with two units; built 1907.", url: "https://www.zillow.com/homedetails/221-N-Delaware-St-San-Mateo-CA-94401/15522187_zpid/" },
-    { address: "3419 La Selva St", price: 998000, beds: 2, baths: 2, sqft: 1190, lot: "1,612 sqft lot", type: "House", days: 61, note: "Listing page shows a $555/mo HOA; attached unit, confirmed single-family on Zillow.", url: "https://www.zillow.com/homedetails/3419-La-Selva-St-San-Mateo-CA-94403/15541037_zpid/" },
-    { address: "927 Shoreline Dr", price: 1099000, beds: 3, baths: 2, sqft: 1570, lot: "", type: "Condo", days: 39, note: "Price cut $48,000 on Nov 4; cut $51,000 on Nov 19.", url: "https://www.zillow.com/homedetails/927-Shoreline-Dr-San-Mateo-CA-94404/15630107_zpid/" },
-    { address: "1749 Shoreview Ave", price: 1189000, beds: 3, baths: 1, sqft: 1400, lot: "6,250 sqft lot", type: "House", days: 5, note: "Listed Nov 20; was coming soon.", url: "https://www.zillow.com/homedetails/1749-Shoreview-Ave-San-Mateo-CA-94401/15524663_zpid/" },
-    { address: "1614 2nd Ave", price: 999000, beds: 3, baths: 2, sqft: 1180, lot: "4,842 sqft lot", type: "House", days: 5, note: "Listed Nov 20.", url: "https://www.zillow.com/homedetails/1614-2nd-Ave-San-Mateo-CA-94401/15524497_zpid/" },
+    { address: "221 N Delaware St", price: 1198000, beds: 3, baths: 2, sqft: 1070, lot: "6,038 sqft lot", type: "House", days: 42, note: "Extra-deep lot with two units; built 1907.", url: "https://www.zillow.com/homedetails/221-N-Delaware-St-San-Mateo-CA-94401/15522187_zpid/" },
+    { address: "3419 La Selva St", price: 998000, beds: 2, baths: 2, sqft: 1190, lot: "1,612 sqft lot", type: "House", days: 62, note: "Listing page shows a $555/mo HOA; attached unit, confirmed single-family on Zillow.", url: "https://www.zillow.com/homedetails/3419-La-Selva-St-San-Mateo-CA-94403/15541037_zpid/" },
+    { address: "927 Shoreline Dr", price: 1099000, beds: 3, baths: 2, sqft: 1570, lot: "", type: "Condo", days: 42, note: "Price cut $48,000 on Nov 4; cut $51,000 on Nov 19.", url: "https://www.zillow.com/homedetails/927-Shoreline-Dr-San-Mateo-CA-94404/15630107_zpid/" },
+    { address: "1749 Shoreview Ave", price: 1189000, beds: 3, baths: 1, sqft: 1400, lot: "6,250 sqft lot", type: "House", days: 7, note: "Listed Nov 20; was coming soon.", url: "https://www.zillow.com/homedetails/1749-Shoreview-Ave-San-Mateo-CA-94401/15524663_zpid/" },
+    { address: "1614 2nd Ave", price: 999000, beds: 3, baths: 2, sqft: 1180, lot: "4,842 sqft lot", type: "House", days: 6, note: "Listed Nov 20.", url: "https://www.zillow.com/homedetails/1614-2nd-Ave-San-Mateo-CA-94401/15524497_zpid/" },
     { address: "0 Parrott Dr", price: 699000, beds: null, baths: null, sqft: null, lot: "0.92 acres", type: "Land", days: 283, note: "Residential lot, zoned R1-A. The only San Mateo lot under the cap.", url: "https://www.zillow.com/homedetails/0-Parrott-Dr-San-Mateo-CA-94402/460029256_zpid/" },
   ],
   "Redwood City": [
-    { address: "827 Chestnut St", price: 989000, beds: 2, baths: 1, sqft: 1160, lot: "5,020 sqft lot", type: "House", days: 32, note: "", url: "https://www.zillow.com/homedetails/827-Chestnut-St-Redwood-City-CA-94063/15566021_zpid/" },
-    { address: "424 5th Ave", price: 875000, beds: 2, baths: 1, sqft: 1000, lot: "2,999 sqft lot", type: "House", days: 82, note: "Price cut $25,000 on Nov 14.", url: "https://www.zillow.com/homedetails/424-5th-Ave-Redwood-City-CA-94063/15578984_zpid/" },
-    { address: "3091 Glendale Ave", price: 998000, beds: 2, baths: 1, sqft: 700, lot: "5,999 sqft lot", type: "House", days: 32, note: "Price cut $301,000 on Nov 16, from about $1,299,000.", url: "https://www.zillow.com/homedetails/3091-Glendale-Ave-Redwood-City-CA-94063/15579995_zpid/" },
-    { address: "108 Bonita Ave", price: 1188000, beds: 2, baths: 1, sqft: 990, lot: "5,480 sqft lot", type: "House", days: 47, note: "Price cut $112,000 on Nov 18.", url: "https://www.zillow.com/homedetails/108-Bonita-Ave-Redwood-City-CA-94061/15576633_zpid/" },
-    { address: "614 Warrington Ave", price: 849000, beds: 2, baths: 2, sqft: 760, lot: "2,500 sqft lot", type: "House", days: 61, note: "Listed Sep 24 at $889,000; cut $40,000 on Oct 19.", url: "https://www.zillow.com/homedetails/614-Warrington-Ave-Redwood-City-CA-94063/15567265_zpid/" },
+    { address: "827 Chestnut St", price: 989000, beds: 2, baths: 1, sqft: 1160, lot: "5,020 sqft lot", type: "House", days: 34, note: "", url: "https://www.zillow.com/homedetails/827-Chestnut-St-Redwood-City-CA-94063/15566021_zpid/" },
+    { address: "424 5th Ave", price: 875000, beds: 2, baths: 1, sqft: 1000, lot: "2,999 sqft lot", type: "House", days: 84, note: "Price cut $25,000 on Nov 14.", url: "https://www.zillow.com/homedetails/424-5th-Ave-Redwood-City-CA-94063/15578984_zpid/" },
+    { address: "3091 Glendale Ave", price: 998000, beds: 2, baths: 1, sqft: 700, lot: "5,999 sqft lot", type: "House", days: 34, note: "Price cut $301,000 on Nov 16, from about $1,299,000.", url: "https://www.zillow.com/homedetails/3091-Glendale-Ave-Redwood-City-CA-94063/15579995_zpid/" },
+    { address: "108 Bonita Ave", price: 1188000, beds: 2, baths: 1, sqft: 990, lot: "5,480 sqft lot", type: "House", days: 49, note: "Price cut $112,000 on Nov 18.", url: "https://www.zillow.com/homedetails/108-Bonita-Ave-Redwood-City-CA-94061/15576633_zpid/" },
+    { address: "614 Warrington Ave", price: 849000, beds: 2, baths: 2, sqft: 760, lot: "2,500 sqft lot", type: "House", days: 63, note: "Listed Sep 24 at $889,000; cut $40,000 on Oct 19.", url: "https://www.zillow.com/homedetails/614-Warrington-Ave-Redwood-City-CA-94063/15567265_zpid/" },
     { address: "2 Laurel Way", price: 520000, beds: null, baths: null, sqft: null, lot: "8,633 sqft", type: "Land", days: 16, note: "Emerald Lake Hills lot, marketed as build-your-dream-home.", url: "https://www.zillow.com/homedetails/2-Laurel-Way-Redwood-City-CA-94062/466189081_zpid/" },
     { address: "Undisclosed address (Lot 80), 94062", price: 545000, beds: null, baths: null, sqft: null, lot: "9,100 sqft", type: "Land", days: 16, note: "Quiet cul-de-sac lot; price cut $304,000 on Nov 7.", url: "https://www.zillow.com/homedetails/Redwood-City-CA-94062/466189082_zpid/" },
   ],
